@@ -13,6 +13,11 @@ namespace ETicaret.Repository.Configurations
     {
         public void Configure(EntityTypeBuilder<YetkiErisim> builder)
         {
+            builder.HasKey(y=>new
+            {
+                y.ErisimAlaniId,
+                y.YetkiId
+            });
             //builder.HasKey(y => y.ErisimAlaniId);
             //builder.HasKey(y => y.YetkiId);
 
