@@ -12,7 +12,7 @@ namespace ETicaret.Core.IRepositories
         //Asenkron bir yapıya göre işlem yapılarak
         //Asenkron sırasıyla gerçekleşmesi gereken işlemleri sıraya tabi tutmadan aynı anda bütün işlemeri gerçekleştirmeyi sağlar. Data ların hızlı çekilmesini sağlar
         IQueryable<TEntity> GetAllQuery(Expression<Func<TEntity,bool>> expression);
-        IQueryable<TEntity> GetAll();
+        IQueryable<TEntity> GetAll();   
         Task<TEntity> GetByIdAsync(int id);
         Task<bool> AnyAsync(Expression<Func<TEntity, bool>> expression);
         Task AddAsync(TEntity entity);
