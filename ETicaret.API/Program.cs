@@ -1,5 +1,10 @@
 ﻿
+using ETicaret.Core.IRepositories;
+using ETicaret.Core.IService;
+using ETicaret.Core.IUnitOfWork;
 using ETicaret.Repository;
+using ETicaret.Repository.Repositories;
+using ETicaret.Repository.UntiOfWork;
 using Microsoft.EntityFrameworkCore;
 using System.Reflection;
 
@@ -14,6 +19,11 @@ namespace ETicaret.API
             // Add services to the container.
 
             builder.Services.AddControllers();
+
+            builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
+            builder.Services.AddScoped(typeof(IService<>), typeof(Service<>));
+            builder.Services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
+            builder.Services.AddSwaggerDocument();//Swager için eklendi
 
             #region DB işlemleri
 
@@ -31,6 +41,10 @@ namespace ETicaret.API
 
             // Configure the HTTP request pipeline.
 
+            //**********************
+            app.UseOpenApi();//Swager da API çalıştırmak için eklendi
+            app.UseSwaggerUi();//Swageri run eder
+            //**********************
             app.UseAuthorization();
 
             app.MapControllers();
