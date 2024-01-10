@@ -72,5 +72,22 @@ namespace ETicaret.Repository.Repositories
             _dbSet.Update(entity);
             //_eTicaretDB.Entry(entity).State=EntityState.Modified;
         }
+
+
+
+
+        public async Task<TEntity> GetFirst(Expression<Func<TEntity, bool>> whereCondition)
+        {
+            try
+            {
+                IQueryable<TEntity> dbSet = _eTicaretDB.Set<TEntity>();
+                return await dbSet.FirstOrDefaultAsync(whereCondition);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine($"Bir Hata Olustu: {e.Message}");
+                throw;
+            }
+        }
     }
 }
