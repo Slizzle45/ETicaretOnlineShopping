@@ -14,6 +14,5 @@ namespace ETicaret.Core.ETicaretDatabase
         public Urunler Urunler { get; set; }
         public Kullanicilar Kullanicilar { get; set; }
 
-        //İsa 8 Ocak 2024 09:59
     }
 }

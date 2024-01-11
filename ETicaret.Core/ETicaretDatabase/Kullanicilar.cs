@@ -21,6 +21,11 @@ namespace ETicaret.Core.ETicaretDatabase
         public bool PersonelMi { get; set; }
 
         public int YetkiId { get; set; }
+
+        public int MusteriId { get; set; }
+
+        public int PersonelId { get; set; }
+
         public  Yetkiler Yetkiler { get; set; }//1 yetkide birden fazla kullanıcı olabilir ilişkisinde burda kullanıcı sonsuz tarafında yer alır
 
         public ICollection<Yorumlar> Yorumlar { get; set; }//1 kullanıcı 1 den fazla yorum yapabilir ilişkisinde burda kullanıcı 1 tarafında yer alır

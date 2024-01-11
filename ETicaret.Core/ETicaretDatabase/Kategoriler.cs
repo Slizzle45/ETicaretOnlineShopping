@@ -8,6 +8,7 @@ namespace ETicaret.Core.ETicaretDatabase
 {
     public class Kategoriler:BaseEntity
     {
+
         public string KategoriAdi{ get; set; }
         public string Aciklama { get; set; }
         //Referans değerlerde nullable 
