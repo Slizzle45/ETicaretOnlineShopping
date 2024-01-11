@@ -7,7 +7,12 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="FakeData\" />
+    <Compile Remove="FakeData\**" />
+    <EmbeddedResource Remove="FakeData\**" />
+    <None Remove="FakeData\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Folder Include="DTO\" />
   </ItemGroup>
 

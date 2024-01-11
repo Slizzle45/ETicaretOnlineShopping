@@ -7,17 +7,22 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ETicaret.UnitTest", "ETicar
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ETicaret.UrunleriGetirService", "ETicaret.UrunleriGetirService\ETicaret.UrunleriGetirService.csproj", "{8D31FFF1-265B-4157-B481-4305628692D0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ETicaret.Core", "ETicaret.Core\ETicaret.Core.csproj", "{C2D1CB38-B503-4368-A29B-58AA25435058}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ETicaret.Core", "ETicaret.Core\ETicaret.Core.csproj", "{C2D1CB38-B503-4368-A29B-58AA25435058}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ETicaret.Repository", "ETicaret.Repository\ETicaret.Repository.csproj", "{4DE2EE34-515E-46B3-A3D3-1E2BD5EE1F9A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ETicaret.Repository", "ETicaret.Repository\ETicaret.Repository.csproj", "{4DE2EE34-515E-46B3-A3D3-1E2BD5EE1F9A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ETicaret.Service", "ETicaret.Service\ETicaret.Service.csproj", "{4B98F735-00DB-4058-8260-0E50334F7513}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ETicaret.Service", "ETicaret.Service\ETicaret.Service.csproj", "{4B98F735-00DB-4058-8260-0E50334F7513}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ETicaret.UI", "ETicaret.UI", "{3AE8C46E-6BBA-42F1-BE3D-BCB6C612EF17}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ETicaret.Web", "ETicaret.Web\ETicaret.Web.csproj", "{F7F3D782-F871-4FCA-9760-DC787625D077}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ETicaret.Web", "ETicaret.Web\ETicaret.Web.csproj", "{F7F3D782-F871-4FCA-9760-DC787625D077}"
+	ProjectSection(ProjectDependencies) = postProject
+		{4B98F735-00DB-4058-8260-0E50334F7513} = {4B98F735-00DB-4058-8260-0E50334F7513}
+		{4DE2EE34-515E-46B3-A3D3-1E2BD5EE1F9A} = {4DE2EE34-515E-46B3-A3D3-1E2BD5EE1F9A}
+		{C2D1CB38-B503-4368-A29B-58AA25435058} = {C2D1CB38-B503-4368-A29B-58AA25435058}
+	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ETicaret.API", "ETicaret.API\ETicaret.API.csproj", "{8F0FB10C-625C-40D7-A51C-AD7B7B63F32C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ETicaret.API", "ETicaret.API\ETicaret.API.csproj", "{8F0FB10C-625C-40D7-A51C-AD7B7B63F32C}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{15343569-BEC7-4372-8260-18F79186F8C5}"
 EndProject
