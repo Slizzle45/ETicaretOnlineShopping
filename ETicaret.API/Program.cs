@@ -5,6 +5,7 @@ using ETicaret.Core.IUnitOfWork;
 using ETicaret.Repository;
 using ETicaret.Repository.Repositories;
 using ETicaret.Repository.UntiOfWork;
+using ETicaret.Service.Services;
 using Microsoft.EntityFrameworkCore;
 using System.Reflection;
 
@@ -31,7 +32,7 @@ namespace ETicaret.API
             {
                 x.UseSqlServer(builder.Configuration.GetConnectionString("SqlConnection"), option =>
                 {
-                    //option.MigrationsAssembly("ETicaret.Repository");//Hangi katmanda DB tanımlı ise o katmöan yazılır. Bunu yerine Assembly Reflection yapısı ile AppDbContext'in olduğu katmanı bulup ismini çekebiliriz
+                    //option.MigrationsAssembly("ETicaret.Repository");//Hangi katmanda DB tanımlı ise o katman yazılır. Bunu yerine Assembly Reflection yapısı ile AppDbContext'in olduğu katmanı bulup ismini çekebiliriz
                     option.MigrationsAssembly(Assembly.GetAssembly(typeof(AppDbContext)).GetName().Name);
                 });
             });
