@@ -9,13 +9,15 @@ namespace ETicaret.Core.IService
 {
     public interface IKullanicilarService:IService<Kullanicilar>
     {
-        Task<List<Kullanicilar>> GetKullanicilarWithPersoneller();
-        Task<Kullanicilar> GetKullanicilarWithPersoneller(Kullanicilar personel);
+        Task<string> KullaniciEkle(string Adi, string Soyadi, string Resim, string Email, string sifre, bool personelMi, int yetkiId,int PersonelId,int personelId);
+        Task<string> TopluKullaniciEkle(IEnumerable<Kullanicilar> kullanicilar);
 
-        Task<List<Kullanicilar>> GetKullanicilarWithMusteriler();
-        Task<Kullanicilar>GetKullanicilarWithMusteriler(Kullanicilar musteri);
+        Task<string> KullaniciGuncelle(int kullanicilarId, string Adi, string Soyadi, string Resim, string Email, string sifre, bool personelMi, bool aktifMi, DateTime eklenmeTarihi, int yetkiId, int MusteriId, int personelId);
 
-        Task<List<Kullanicilar>> GetKullanicilarWithYetkiler();
-        Task<Kullanicilar>GetKullanicilarWithYetkiler(Kullanicilar yetk);
+        Task<string> KullaniciSil(int kullanicilarId);
+        Task<string> TopluKullaniciSil(IEnumerable<Kullanicilar> kullanicilar);
+
+        Task<List<Kullanicilar>> KullaniciListesi();
+        Task<List<Kullanicilar>> KullaniciListesi(bool aktifMi);
     }
 }

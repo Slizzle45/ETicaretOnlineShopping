@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -20,3 +21,21 @@ namespace ETicaret.Core.IService
         Task RemoveRangeAsync(IEnumerable<TEntity> entities);
     }
 }
+//*************************************NOTLARIM******************************
+//GetAllQuery: Belirli bir şartı sağlayan tüm varlıkları sorgular.
+//GetAllAsyncs: Tüm varlıkları asenkron olarak getirir.
+//GetByIdAsync: Belirli bir kimliğe sahip varlığı asenkron olarak getirir.
+//AnyAsync: Belirli bir şartı sağlayan herhangi bir varlık olup olmadığını kontrol eder.
+//AddAsync: Yeni bir varlık ekler.
+//AddRangeAsync: Birden çok varlığı asenkron olarak ekler.
+//UpdateAsync: Varlık güncellemesini gerçekleştirir.
+//RemoveAsync: Belirli bir varlığı asenkron olarak kaldırır.
+//RemoveRangeAsync: Birden çok varlığı asenkron olarak kaldırır.GetAllQuery: Belirli bir şartı sağlayan tüm varlıkları sorgular.
+//GetAllAsyncs: Tüm varlıkları asenkron olarak getirir.
+//GetByIdAsync: Belirli bir kimliğe sahip varlığı asenkron olarak getirir.
+//AnyAsync: Belirli bir şartı sağlayan herhangi bir varlık olup olmadığını kontrol eder.
+//AddAsync: Yeni bir varlık ekler.
+//AddRangeAsync: Birden çok varlığı asenkron olarak ekler.
+//UpdateAsync: Varlık güncellemesini gerçekleştirir.
+//RemoveAsync: Belirli bir varlığı asenkron olarak kaldırır.
+//RemoveRangeAsync: Birden çok varlığı asenkron olarak kaldırır.
