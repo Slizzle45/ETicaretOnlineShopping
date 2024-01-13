@@ -1,4 +1,5 @@
-﻿using ETicaret.Core.ETicaretDatabase;
+﻿using ETicaret.Core.DTO;
+using ETicaret.Core.ETicaretDatabase;
 using ETicaret.Core.IRepositories;
 using ETicaret.Core.IService;
 using ETicaret.Core.IUnitOfWork;
@@ -12,14 +13,19 @@ namespace ETicaret.Service.Services
 {
     public class UrunlerService : Service<Urunler>, IUrunlerService
     {
-        public UrunlerService(IGenericRepository<Urunler> repository, IUnitOfWork unitOfWork) : base(repository, unitOfWork)
-        {
+        //readonly IKategoriRepository _kategoriRepository;
+        readonly IUrunlerRepository _urunlerRepository;
 
+        public UrunlerService(IGenericRepository<Urunler> repository, IUnitOfWork unitOfWork, IUrunlerRepository urunlerRepository) : base(repository, unitOfWork)
+        {
+            //_kategoriRepository = kategoriRepository;
+            _urunlerRepository= urunlerRepository;
         }
 
         public Task<List<Urunler>> GetUrunlerWithKategoriAsync()
         {
-            throw new NotImplementedException();
+            return _urunlerRepository.GetUrunlerWithKategoriAsync();
+
         }
 
         public Task<Urunler> GetUrunlerWithKategoriAsync(int urunlerId)
@@ -32,6 +38,10 @@ namespace ETicaret.Service.Services
             throw new NotImplementedException();
         }
 
+        public Task<GetUrunlerWithKategoriDTO> GetUrunlerKategoriler()
+        {
+            throw new NotImplementedException();
+        }
 
     }
 }
