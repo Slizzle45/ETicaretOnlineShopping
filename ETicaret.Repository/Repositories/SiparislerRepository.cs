@@ -1,5 +1,6 @@
 ﻿using ETicaret.Core.ETicaretDatabase;
 using ETicaret.Core.IRepositories;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,6 +13,22 @@ namespace ETicaret.Repository.Repositories
     {
         public SiparislerRespository(AppDbContext eTicaretDB) : base(eTicaretDB)
         {
+        }
+
+        // Siparişlerde sipariş tarihi yoktu sonradan eklendi
+        public async Task<List<Siparisler>> GetSiparislerMadeTodayAsync(DateTime siparisTarihi)
+        {
+            return await _eTicaretDB.Siparisler.Include(m => m.EklenmeTarih).ToListAsync();
+        }
+
+        public async Task<List<Siparisler>> GetSiparislerWithMusterilerAsync(Musteriler musteriID)
+        {
+            return await _eTicaretDB.Siparisler.Include(m => m.Musteriler).ToListAsync();
+        }
+
+        public async Task<List<Siparisler>> GetSiparislerWithKullanicilarAsync(Kullanicilar kullaniciID)
+        {
+            return await _eTicaretDB.Siparisler.Include(m => m.Kullanicilar).ToListAsync();
         }
     }
 }

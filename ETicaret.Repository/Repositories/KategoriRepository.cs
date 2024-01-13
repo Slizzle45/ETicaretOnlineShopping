@@ -1,5 +1,6 @@
 ﻿using ETicaret.Core.ETicaretDatabase;
 using ETicaret.Core.IRepositories;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,33 +11,60 @@ namespace ETicaret.Repository.Repositories
 {
     public class KategoriRepository : GenericRepository<Kategoriler>, IKategoriRepository
     {
+        private readonly AppDbContext _eTicaret;
         public KategoriRepository(AppDbContext eTicaretDB) : base(eTicaretDB)
         {
+            _eTicaret = eTicaretDB;
         }
 
-        public Task<Kategoriler> AddAsync(string kategoriAdi, string aciklama)
+        public async Task<string> KategoriEkleAsync(string kategoriAdi, string aciklama)
         {
-            throw new NotImplementedException();
+            try
+            {
+                Kategoriler kategoriler = new Kategoriler();
+                kategoriler.KategoriAdi = kategoriAdi;
+                kategoriler.Aciklama = aciklama;
+                await AddAsync(kategoriler);
+                return "İşlem Başarılı";
+            }
+            catch (Exception ex)
+            {
+                return "İşlem sırasında hata " + ex + "oluştu";
+            }
         }
 
-        public Task<Kategoriler> DeleteAsync(int id)
+        public async Task<string> KategoriGuncelleAsync(int id, string kategoriAdi, string aciklama)
         {
-            throw new NotImplementedException();
+            var kategoriGuncelle = await GetByIdAsync(id);
+            try
+            {
+                kategoriGuncelle.KategoriAdi = kategoriAdi;
+                kategoriGuncelle.Aciklama = aciklama;
+                return "İşlem Başarılı";
+            }
+            catch (Exception ex)
+            {
+                return "İşlem sırasında hata " + ex + "oluştu";
+            }
         }
 
-        public Task<List<Kategoriler>> GetAllAsync()
+        public async Task<List<Kategoriler>> KategoriListeleAsync()
         {
-            throw new NotImplementedException();
+            return await GetAll().ToListAsync();
         }
 
-        public Task<Kategoriler> GetIdAsync(int id)
+        public async Task<string> KategoriSilAsync(int id)
         {
-            throw new NotImplementedException();
-        }
-
-        public Task<Kategoriler> UpdateAsync(int id, string kategoriAdi, string aciklama)
-        {
-            throw new NotImplementedException();
+            try
+            {
+                var kategoriPasifEt = await GetByIdAsync(id);
+                kategoriPasifEt.AktifMi = false;
+                return "İşlem Başarılı";
+            }
+            catch (Exception ex)
+            {
+                return "İşlem sırasında hata " + ex + "oluştu";
+            }
         }
     }
 }

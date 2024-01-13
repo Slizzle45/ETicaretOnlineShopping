@@ -1,5 +1,6 @@
 ﻿using ETicaret.Core.ETicaretDatabase;
 using ETicaret.Core.IRepositories;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,18 +11,16 @@ namespace ETicaret.Repository.Repositories
 {
     public class IlceRepoistory : GenericRepository<Ilceler>, IIlceRepository
     {
+        //private readonly AppDbContext _eTicaretDB;
         public IlceRepoistory(AppDbContext eTicaretDB) : base(eTicaretDB)
         {
+            
         }
 
-        public Task<List<Ilceler>> GetAllAsync()
+        public async Task<List<Ilceler>> IlceListeleAsync()
         {
-            throw new NotImplementedException();
+            return await GetAll().ToListAsync();
         }
 
-        public Task<Ilceler> GetById(int id)
-        {
-            throw new NotImplementedException();
-        }
     }
 }

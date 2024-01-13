@@ -1,5 +1,6 @@
 ﻿using ETicaret.Core.ETicaretDatabase;
 using ETicaret.Core.IRepositories;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,14 +15,14 @@ namespace ETicaret.Repository.Repositories
         {
         }
 
-        public Task<List<Iller>> GetAllAsync()
+        public async Task<List<Iller>> GetIllerWithIlceler(int ilId)
         {
-            throw new NotImplementedException();
+            return await _eTicaretDB.Iller.Include(k => k.Ilceler).ToListAsync();
         }
 
-        public Task<Iller> GetById(int id)
+        public async Task<List<Iller>> IllerListele()
         {
-            throw new NotImplementedException();
+            return await GetAll().ToListAsync();
         }
     }
 }

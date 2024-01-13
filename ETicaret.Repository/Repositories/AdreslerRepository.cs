@@ -1,5 +1,6 @@
 ﻿using ETicaret.Core.ETicaretDatabase;
 using ETicaret.Core.IRepositories;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,51 +11,71 @@ namespace ETicaret.Repository.Repositories
 {
     public class AdreslerRepository : GenericRepository<Adresler>, IAdreslerRepository
     {
-        private readonly AppDbContext _db;
+        private readonly AppDbContext _eTicaret;
         public AdreslerRepository(AppDbContext eTicaretDB) : base(eTicaretDB)
         {
-            _db = eTicaretDB;
+            _eTicaret = eTicaretDB;
         }
 
-        public Task<Adresler> AddAsync(string adresbasligi, string adres, string postaKodu, int ilKodu, int ilceKodu, int musteriId)
+        public async Task<string> AdresEkleAsync(string adresbasligi, string adres, string postaKodu, int ilKodu, int ilceKodu, int musteriId)
         {
-            throw new NotImplementedException();
-            //try
-            //{
-            //    Adresler adresler = new Adresler();
-            //    adresler.AdresBasligi = adresbasligi;
-            //    adresler.Adres = adres;
-            //    adresler.PostaKodu = postaKodu;
-            //    adresler.IlKodu = ilKodu;
-            //    adresler.IlceKod = ilceKodu;
-            //    AddAsync(adresler);
-            //    return;
-            //}
-            //catch (Exception)
-            //{
-
-            //    throw;
-            //}
+            try
+            {
+                Adresler adresler = new Adresler();
+                adresler.AdresBasligi = adresbasligi;
+                adresler.Adres = adres;
+                adresler.PostaKodu = postaKodu;
+                adresler.IlKodu = ilKodu;
+                adresler.IlceKod = ilceKodu;
+                await AddAsync(adresler);
+                return "İşlem Başarılı";
+            }
+            catch (Exception ex)
+            {
+                return "İşlem sırasında hata " + ex + "oluştu";
+            }
         }
 
-        public Task<Adresler> DeleteAsync(int id)
+        public async Task<string> AdresGuncelleAsync(int id, string adresbasligi, string adres, string postaKodu, int ilKodu, int ilceKodu)
         {
-            throw new NotImplementedException();
+            var adresGuncelle = await GetByIdAsync(id);
+            try
+            {
+                adresGuncelle.AdresBasligi = adresbasligi;
+                adresGuncelle.Adres = adres;
+                adresGuncelle.PostaKodu = postaKodu;
+                adresGuncelle.IlKodu = ilKodu;
+                adresGuncelle.IlceKod = ilceKodu;
+                return "İşlem Başarılı";
+            }
+            catch (Exception ex)
+            {
+                return "İşlem sırasında hata " + ex + "oluştu";
+            }
         }
 
-        public Task<List<Adresler>> GetAllAsync()
+        public async Task<List<Adresler>> AdreslerListeleAsync()
         {
-            throw new NotImplementedException();
+            return await GetAll().ToListAsync();
         }
 
-        public Task<Adresler> GetIdAsync(int id)
+        public async Task<string> AdresSilAsync(int id)
         {
-            throw new NotImplementedException();
-        }
-
-        public Task<Adresler> UpdateAsync(int id, string adresbasligi, string adres, string postaKodu, int ilKodu, int ilceKodu)
-        {
-            throw new NotImplementedException();
+            var adresSil = await GetByIdAsync(id);
+            try
+            {
+                if (adresSil != null)
+                {
+                    Remove(adresSil);
+                    await _eTicaret.SaveChangesAsync();
+                    return "İşlem Başarılı";
+                }
+                return "İşlem Başarısız";
+            }
+            catch (Exception ex)
+            {
+                return "İşlem sırasında hata " + ex + "oluştu";
+            }
         }
     }
 }

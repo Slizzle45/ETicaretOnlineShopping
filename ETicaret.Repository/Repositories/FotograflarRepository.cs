@@ -16,14 +16,87 @@ namespace ETicaret.Repository.Repositories
 
         }
 
-        public async Task<List<Fotograflar>> GetFotograflarWithUrunlerAsync()
+        public async Task<string> FotografEkle(string fotografYolu, string fotografAciklamasi, byte? fotografSirasi, int urunId, bool aktifMi, DateTime eklenmeTarihi)
         {
-            return await _eTicaretDB.Fotograflar.Include(f => f.Urunler).ToListAsync();
+            try
+            {
+                Fotograflar fotografEkle = new();
+                fotografEkle.FotografYolu = fotografYolu;
+                fotografEkle.FotografAciklamasi = fotografAciklamasi;
+                fotografEkle.FotografSirasi = fotografSirasi;
+                fotografEkle.UrunId = urunId;
+                fotografEkle.AktifMi = aktifMi;
+                fotografEkle.EklenmeTarih = eklenmeTarihi;
+                await AddAsync(fotografEkle);
+
+                return "İşlem başarıyla gerçekleştirildi.";
+            }
+            catch (Exception ex)
+            {
+                return $"Hata oluştu:\n{ex}";
+            }
         }
 
-        public Task<Fotograflar> GetFotograflarWithUrunlerAsync(int fotograflarId)
+        public async Task<string> FotografGuncelle(int fotografId, string fotografYolu, string fotografAciklamasi, byte? fotografSirasi, int urunId, bool aktifMi, DateTime eklenmeTarihi, DateTime guncellemeTarihi)
         {
-            throw new NotImplementedException();
+            var fotografGuncelle = await GetByIdAsync(fotografId);
+
+            try
+            {
+                fotografGuncelle.FotografYolu = fotografYolu;
+                fotografGuncelle.FotografAciklamasi = fotografAciklamasi;
+                fotografGuncelle.FotografSirasi = fotografSirasi;
+                fotografGuncelle.UrunId = urunId;
+                fotografGuncelle.AktifMi = aktifMi;
+                fotografGuncelle.EklenmeTarih = eklenmeTarihi;
+                fotografGuncelle.GuncellenmeTarih = guncellemeTarihi;
+                
+                return "İşlem başarıyla gerçekleştirildi.";
+            }
+            catch (Exception ex)
+            {
+                return $"Hata oluştu:\n{ex}";
+            }
         }
+
+        public async Task<List<Fotograflar>> FotografListesi()
+        {
+            return await GetAll().ToListAsync();
+        }
+
+        public async Task<List<Fotograflar>> FotografListesi(bool aktifMi)
+        {
+            return await GetAllQuery(f => f.AktifMi == aktifMi).ToListAsync();
+        }
+
+        public async Task<int> FotografSayisi(int fotografId)
+        {
+            return await GetAllQuery(f => f.Id == fotografId).CountAsync();
+        }
+
+        public async Task<string> FotografSil(int fotografId)
+        {
+            var fotografSil = await GetByIdAsync(fotografId);
+
+            try
+            {
+                if (fotografSil != null)
+                {
+                    Remove(fotografSil);
+                    await _eTicaretDB.SaveChangesAsync();
+
+                    return "İşlem başarıyla gerçekleştirildi.";
+                }
+                else
+                {
+                    return "Fotoğraf bulunamadı.";
+                }
+            }
+            catch (Exception ex)
+            {
+                return $"Hata oluştu:\n{ex}";
+            }
+        }
+
     }
 }

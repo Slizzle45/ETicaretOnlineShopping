@@ -13,5 +13,10 @@ namespace ETicaret.Repository.Repositories
         public SiparislerDetayRespository(AppDbContext eTicaretDB) : base(eTicaretDB)
         {
         }
+
+        public Task<List<SiparisDetay>> GetSiparisDetayWithDateAsync(Urunler urunID, DateTime baslangic, DateTime bitis)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
