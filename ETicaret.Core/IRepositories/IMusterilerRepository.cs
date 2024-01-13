@@ -15,5 +15,10 @@ namespace ETicaret.Core.IRepositories
         Task<Musteriler> GetMusteriWithAdresAsync(int musteriID);
         Task<List<Musteriler>> GetMusteriWithKullaniciAsync();
         Task<Musteriler> GetMusteriWithKullaniciAsync(int musteriID);
+        Task<string> MusteriEkleAsync(string adi, string soyadi, string cinsiyet, string telefon, string meslek, DateTime dogumTarihi, bool aktifMi, DateTime eklenmeTarihi, DateTime guncellenmeTarihi, int kullaniciId);
+        Task<string> MusteriGuncelleAsync(int musteriId ,string adi, string soyadi, string cinsiyet, string telefon, string meslek, DateTime dogumTarihi, bool aktifMi, DateTime eklenmeTarihi, DateTime guncellenmeTarihi, int kullaniciId);
+        Task<string> MusteriSilAsync(int musteriId);
+        Task<List<Musteriler>> MusteriListesiAsync();
+        Task<List<Musteriler>> MusteriListesiAsync(bool aktifMi);
     }
 }

@@ -9,10 +9,9 @@ namespace ETicaret.Core.IRepositories
 {
     public interface IKategoriRepository : IGenericRepository<Kategoriler>
     {
-        Task<List<Kategoriler>> GetAllAsync();
-        Task<Kategoriler> GetIdAsync(int id);
-        Task<Kategoriler> AddAsync(string kategoriAdi, string aciklama);
-        Task<Kategoriler> UpdateAsync(int id, string kategoriAdi, string aciklama);
-        Task<Kategoriler> DeleteAsync(int id);
+        Task<List<Kategoriler>> KategoriListeleAsync();
+        Task<string> KategoriEkleAsync(string kategoriAdi, string aciklama);
+        Task<string> KategoriGuncelleAsync(int id, string kategoriAdi, string aciklama);
+        Task<string> KategoriSilAsync(int id);
     }
 }

@@ -9,12 +9,7 @@ namespace ETicaret.Core.IService
 {
     public interface IErisimAlanlariService : IService<ErisimAlanlari>
     {
-        Task<string> ErisimAlaniEkle(string controllerAdi, string viewAdi, string aciklama);
-        Task<string> TopluErisimAlaniEkle(IEnumerable<ErisimAlanlari> erisimAlanlari);
-        Task<string> ErisimAlaniGuncelle(int erisimAlaniId, string controllerAdi, string viewAdi, string aciklama, bool aktifMi, DateTime eklemeTarihi);
-        Task<string> ErisimAlaniSil(int erisimAlaniId);
-        Task<string> TopluErisimAlaniSil(IEnumerable<ErisimAlanlari> erisimAlanlari);
-        Task<List<ErisimAlanlari>> ErisimAlaniListesi();
-        Task<List<ErisimAlanlari>> ErisimAlaniListesi(bool aktifMi);
+        Task<List<ErisimAlanlari>> GetErisimAlanlariWithYetkiIdAsync(int yetkiId);
+
     }
 }

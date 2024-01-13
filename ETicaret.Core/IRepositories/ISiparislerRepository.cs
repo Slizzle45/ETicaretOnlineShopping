@@ -9,9 +9,8 @@ namespace ETicaret.Core.IRepositories
 {
     public interface ISiparislerRepository : IGenericRepository<Siparisler>
     {
-        //Bugün yapılan siparişler
-        //Bir personelin yaptığı siparişler
-        //Bir müşterinin siparişleri
-        //Bir ürün için belli tarihler arasında yapılan iparişleri
+        Task<List<Siparisler>> GetSiparislerMadeTodayAsync(DateTime siparisTarihi);
+        Task<List<Siparisler>> GetSiparislerWithKullanicilarAsync(Kullanicilar kullaniciID);
+        Task<List<Siparisler>> GetSiparislerWithMusterilerAsync(Musteriler musteriID);
     }
 }

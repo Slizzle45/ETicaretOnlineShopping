@@ -9,11 +9,10 @@ namespace ETicaret.Core.IRepositories
 {
     public interface IAdreslerRepository : IGenericRepository<Adresler>
     {
-        Task<List<Adresler>> GetAllAsync();
-        Task<Adresler> GetIdAsync(int id);
-        Task<Adresler> AddAsync(string adresbasligi, string adres, string postaKodu, int ilKodu, int ilceKodu, int musteriId);
-        Task<Adresler> UpdateAsync(int id, string adresbasligi, string adres, string postaKodu, int ilKodu, int ilceKodu);
-        Task<Adresler> DeleteAsync(int id);
+        Task<List<Adresler>> AdreslerListeleAsync();
+        Task<string> AdresEkleAsync(string adresbasligi, string adres, string postaKodu, int ilKodu, int ilceKodu, int musteriId);
+        Task<string> AdresGuncelleAsync(int id, string adresbasligi, string adres, string postaKodu, int ilKodu, int ilceKodu);
+        Task<string> AdresSilAsync(int id);
     }
 
 }

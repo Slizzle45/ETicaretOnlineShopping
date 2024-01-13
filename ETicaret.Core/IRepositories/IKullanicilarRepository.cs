@@ -9,13 +9,16 @@ namespace ETicaret.Core.IRepositories
 {
     public interface IKullanicilarRepository:IGenericRepository<Kullanicilar>
     {
-        Task<List<Kullanicilar>> GetKullanicilarWithPersonellerAsync();
-        Task<Kullanicilar> GetKullanicilarWithPersonellerAsync(int KullaniciId);
+        Task<string> KullaniciEkle(string Adi, string Soyadi, string Resim, string KullaniciEmail, string KullaniciSifre, bool PersonelMi, int YetkiId, int MusteriId, int PersonelID);
+        Task<string> TopluKullaniciEkle(IEnumerable<Kullanicilar> kullanicilar);
 
-        Task<List<Kullanicilar>> GetKullanicilarWithMusterilerAsync();
-        Task<Kullanicilar> GetKullanicilarWithMusterilerAsync(int KullaniciId);
+        Task<string> KullaniciGuncelle(int KullanicilarId, string Adi, string Soyadi, string Resim, string KullaniciEmail, string KullaniciSifre, bool PersonelMi,bool aktifMi,DateTime EklenmeTarihi,int YetkiId, int MusteriId, int PersonelID);
 
-        Task<List<Kullanicilar>> GetKullanicilarWithYetkilerAsync();
-        Task<Kullanicilar> GetKullanicilarWithYetkilerAsync(int KullaniciId);
+        Task<string> KullaniciSil(int KullanicilarId);
+        Task<string> TopluKullaniciSil(IEnumerable<Kullanicilar> kullanicilar);
+
+        Task<List<Kullanicilar>> KullaniciListesi();
+
+        Task<List<Kullanicilar>> KullaniciListesi(bool aktifMi);
     }
 }

@@ -9,7 +9,7 @@ namespace ETicaret.Core.IRepositories
 {
     public interface IilRepository : IGenericRepository<Iller>
     {
-        Task<List<Iller>> GetAllAsync();
-        Task<Iller> GetById(int id);
+        Task<List<Iller>> IllerListele();
+        Task<List<Iller>> GetIllerWithIlceler(int ilId);
     }
 }

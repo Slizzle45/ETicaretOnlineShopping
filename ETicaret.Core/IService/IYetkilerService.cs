@@ -9,11 +9,6 @@ namespace ETicaret.Core.IService
 {
     public interface IYetkilerService : IService<Yetkiler>
     {
-        Task<int> YetkiSayisi(int yetkiId);
-        Task<string> YetkiEkle(string yetkiAdi);
-        Task<string> YetkiGuncelle(int yetkiId, string yetkiAdi, bool aktifMi, DateTime eklemeTarihi, DateTime guncellemeTarihi);
-        Task<string> YetkiSil(int yetkiId);
-        Task<List<Yetkiler>> YetkiListesi();
-        Task<List<Yetkiler>> YetkiListesi(bool aktifMi);
+        Task<List<Yetkiler>> GetYetkilerWithErisimAlanIDAsync(int erisimAlanId);
     }
 }
