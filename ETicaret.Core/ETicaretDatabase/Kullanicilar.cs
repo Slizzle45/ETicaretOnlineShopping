@@ -34,10 +34,7 @@ namespace ETicaret.Core.ETicaretDatabase
         public Musteriler Musteriler { get; set; }
         public Personeller Personeller { get; set; }
 
-        //SERKAN KABADAYIOĞULLARI YAZILIM UZMANI
-        //************************Özel Durum--=> Tablonun kendisi ile bağlanması
-        //public ICollection<Kullanicilar> Onaylayan { get; set; }
-        //public Kullanicilar  OnayDurum { get; set; }
+
 
 
     }
