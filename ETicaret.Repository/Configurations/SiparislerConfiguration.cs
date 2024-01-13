@@ -17,7 +17,7 @@ namespace ETicaret.Repository.Configurations
             builder.Property(k => k.Id).UseIdentityColumn();
             builder.Property(k => k.EklenmeTarih).IsRequired();
             builder.Property(k => k.ToplamUrunAdet).IsRequired();
-            builder.Property(k => k.ToplamFiyat).IsRequired();
+            builder.Property(k => k.ToplamFiyat).IsRequired().HasColumnType("decimal(18,2)");
             builder.Property(k => k.MusteriId).IsRequired();
             builder.HasMany(k => k.SiparisDetay).WithOne(k => k.Siparisler).HasForeignKey(k => k.SiparisId);
 
