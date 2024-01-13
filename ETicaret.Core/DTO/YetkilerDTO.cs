@@ -6,11 +6,8 @@ using System.Threading.Tasks;
 
 namespace ETicaret.Core.DTO
 {
-    public class GetErisimAlanlariWithYetkiDTO
+    public class YetkilerDTO : BaseDTO
     {
         public string YetkiAdi { get; set; }
-        public string ControllerAdi { get; set; }
-        public string ViewAdi { get; set; }
-
     }
 }

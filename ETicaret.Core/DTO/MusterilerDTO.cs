@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ETicaret.Core.DTO
 {
-    public class GetMusteriWithKullaniciDTO
+    public class MusterilerDTO : BaseDTO
     {
         public string Adi { get; set; }
         public string Soyadi { get; set; }
@@ -14,10 +14,5 @@ namespace ETicaret.Core.DTO
         public string Telefonu { get; set; }
         public string Meslek { get; set; }
         public DateTime DogumTarihi { get; set; }
-        public string KullaniciAdi { get; set; }// Kullanıcı tablosunda'da adi var. Çakışma oluyor.
-        public string KullaniciSoyadi { get; set; }
-        public string KullaniciResim { get; set; }
-        public string KullaniciEmail { get; set; }
-        //public string KullaniciSifre { get; set; }
     }
 }

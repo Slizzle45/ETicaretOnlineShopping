@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace ETicaret.Core.DTO
 {
-    public class GetFotograflarWithUrunlerDTO
+    public class GetFotograflarWithUrunlerDTO : BaseListDTO
     {
         public Fotograflar Fotograflar { get; set; }
 

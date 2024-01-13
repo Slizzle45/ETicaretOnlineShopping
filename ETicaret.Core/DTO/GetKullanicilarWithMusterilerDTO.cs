@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace ETicaret.Core.DTO
 {
-	public class GetKullanicilarWithMusterilerDTO
+	public class GetKullanicilarWithMusterilerDTO:BaseListDTO
 	{
 		public Kullanicilar kullanicilar { get; set; }
 

@@ -8,9 +8,9 @@ namespace ETicaret.Core.DTO
 {
     public class GetYetkilerWithErisimAlaniDTO
     {
-        public int ErisimAlaniId { get; set; }
-        public int YetkiId { get; set; }
         public string YetkiAdi { get; set; }
+        public string ControllerAdi { get; set; }
+        public string ViewAdi { get; set; }
 
     }
 }

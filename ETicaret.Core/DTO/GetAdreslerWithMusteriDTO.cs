@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ETicaret.Core.DTO
 {
-    public class GetAdreslerWithMusteriDTO
+    public class GetAdreslerWithMusteriDTO :BaseDTO
     {
         public string AdresBasligi { get; set; }
         public string Adres { get; set; }
