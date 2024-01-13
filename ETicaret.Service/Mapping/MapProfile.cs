@@ -1,7 +1,6 @@
 ﻿using AutoMapper;//AutoMapper.Extention.MS.DI
 using ETicaret.Core.DTO;
 using ETicaret.Core.ETicaretDatabase;
-using ETicaret.Repository.DTO;
 using System;
 using System.Collections.Generic;
 using System.Linq;

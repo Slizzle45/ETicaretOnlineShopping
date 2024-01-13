@@ -9,12 +9,12 @@ namespace ETicaret.API.Controllers
 {
     [Route("api/[Controller]")]
     [ApiController]
-    public class UrunlerController : Controller
+    public class UrunlerController : BaseController
     {
         private readonly IService<Urunler> _service;
-        private readonly  IMapper _mapper;//AutoMapper için eklenen kütüphanede DI kullanılması için IMapper  kütüphane içinde geliyor.
+        private readonly IMapper _mapper;//AutoMapper için eklenen kütüphanede DI kullanılması için IMapper  kütüphane içinde geliyor.
 
-        public UrunlerController(IService<Urunler> service,IMapper mapper)
+        public UrunlerController(IService<Urunler> service, IMapper mapper)
         {
             _service = service;
             _mapper = mapper;
@@ -25,8 +25,13 @@ namespace ETicaret.API.Controllers
         {
             var urunler = await _service.GetAllAsyncs();
             var urunlerDTO = _mapper.Map<List<UrunlerDTO>>(urunler);
-            return Ok(urunlerDTO);
-            //return Ok(urunler);
+
+            //return Ok(urunler);//OK ile Result yaptık
+            //return Ok(APIResponseDTO<List<UrunlerDTO>>.Success(200, urunlerDTO));//OK içine DTO yerleştirildi
+            //return SelectResponseResult(APIResponseDTO<List<TEntity>>.Success(200, tEntity));//OK yerine BaseController içine SelectResponseResult yaptık
+
+            return ResultAPI(urunlerDTO);//SelectResponseResult için daha efektif olması için BaseController altında ResultAPI Method yaptık. Tentity verecek bütün tablolar için kullanılabilir yaptık
+
         }
 
         #region Commant
@@ -70,18 +75,21 @@ namespace ETicaret.API.Controllers
         [HttpPut]
         public async Task<IActionResult> UrunlerUpdate(UrunlerUpdateDTO urunUpdateDTO)
         {
-            var getUrun=_service.GetByIdAsync(urunUpdateDTO.Id);
+            var getUrun = await _service.GetByIdAsync(urunUpdateDTO.Id);
 
-            if (getUrun!=null)
+            if (getUrun != null)
             {
-                await _service.UpdateAsync(_mapper.Map<Urunler>(urunUpdateDTO));
+                await _service.UpdateAsync(_mapper.Map(urunUpdateDTO, getUrun));
+                //  await _service.UpdateAsync(_mapper.Map<Urunler>(urunUpdateDTO));
             }
             else
             {
+                //return NoContent();
+                //return Ok(APIResponseDTO<List<UrunlerDTO>>.Fail(200,"ID değeri hatalı"));
                 return NoContent();
-            }       
+            }
 
-            return Ok();
+            return ResultAPI(urunUpdateDTO);
         }
     }
 }

@@ -1,7 +1,6 @@
 ﻿using AutoMapper;
 using ETicaret.Core.ETicaretDatabase;
 using ETicaret.Core.IService;
-using ETicaret.Repository.DTO;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ETicaret.API.Controllers
@@ -33,7 +32,7 @@ namespace ETicaret.API.Controllers
         public async Task<IActionResult> KategoriIndex()
         {
             var kategori = await _service.GetAllAsyncs();
-            var kategoriDTO = _mapper.Map<List<KategorilerDTO>>(kategori);
+            //var kategoriDTO = _mapper.Map<List<KategorilerDTO>>(kategori);
 
             return Ok(kategori);
         }
