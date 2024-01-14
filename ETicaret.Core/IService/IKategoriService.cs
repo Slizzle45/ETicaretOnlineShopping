@@ -11,5 +11,6 @@ namespace ETicaret.Core.IService
     {
         Task<List<Kategoriler>> GetKategorilerWithUrunler();
         Task<Kategoriler> GetKategorilerWithUrunler(int kategorilerId);
+        IQueryable<Kategoriler> KategoriListesi();
     }
 }

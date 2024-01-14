@@ -18,7 +18,7 @@ namespace ETicaret.Service.Mapping
         {
             CreateMap<Urunler, UrunlerDTO>().ReverseMap();
             //Urunler nesnesi yerine UrunlerDTO nesnesi kullanılacak anlamına geliyor, ReverseMap ise bu olayın tam tersi de gerçekleşebiliri yani UrunlerDTO yerine Urunler nesnesi kullanılabilir
-            CreateMap<Urunler, GetUrunlerWithKategoriDTO>().ReverseMap();
+            CreateMap<Urunler,GetUrunlerWithKategoriDTO>().ReverseMap();
             CreateMap<Urunler, UrunlerUpdateDTO>().ReverseMap();
             //CreateMap<Kategoriler,KategorilerDTO>().ReverseMap();
 
@@ -26,7 +26,7 @@ namespace ETicaret.Service.Mapping
             CreateMap<Kullanicilar, GetKullanicilarWithPersonellerDTO>().ReverseMap();
             CreateMap<Kullanicilar, GetKullanicilarWithMusterilerDTO>().ReverseMap();
             CreateMap<Kullanicilar, GetKullanicilarWithYetkilerDTO>().ReverseMap();
-
+           
             CreateMap<Personeller, PersonellerDTO>().ReverseMap();
             CreateMap<Personeller, GetPersonellerWithKullanicilarDTO>().ReverseMap();
             CreateMap<Fotograflar, FotograflarDTO>().ReverseMap();
@@ -41,7 +41,7 @@ namespace ETicaret.Service.Mapping
             CreateMap<ErisimAlanlari, GetErisimAlanlariWithYetkiDTO>().ReverseMap();
             CreateMap<ErisimAlanlari, ErisimAlanlariDTO>().ReverseMap();
             CreateMap<ErisimAlanlari, ErisimAlanlariUpdateDTO>().ReverseMap();
-            CreateMap<Yorumlar, YorumlarDTO>().ReverseMap();
+            CreateMap<Yorumlar,YorumlarDTO>().ReverseMap();
             CreateMap<Yorumlar, GetYorumlarWithKullanicilarDTO>().ReverseMap();
             CreateMap<Yorumlar, GetYorumlarWithUrunlerDTO>().ReverseMap();
             CreateMap<Menular, MenulerDTO>().ReverseMap();

@@ -1,4 +1,5 @@
-﻿using ETicaret.Core.DTO;
+﻿using AutoMapper;
+using ETicaret.Core.DTO;
 using ETicaret.Core.ETicaretDatabase;
 using ETicaret.Core.IRepositories;
 using ETicaret.Core.IService;
@@ -15,22 +16,27 @@ namespace ETicaret.Service.Services
     {
         //readonly IKategoriRepository _kategoriRepository;
         readonly IUrunlerRepository _urunlerRepository;
+        readonly IMapper _mapper;
 
-        public UrunlerService(IGenericRepository<Urunler> repository, IUnitOfWork unitOfWork, IUrunlerRepository urunlerRepository) : base(repository, unitOfWork)
+        public UrunlerService(IGenericRepository<Urunler> repository, IUnitOfWork unitOfWork, IUrunlerRepository urunlerRepository,IMapper mapper) : base(repository, unitOfWork)
         {
             //_kategoriRepository = kategoriRepository;
             _urunlerRepository= urunlerRepository;
+            _mapper=mapper;
         }
 
-        public Task<List<Urunler>> GetUrunlerWithKategoriAsync()
+        public async Task<List<GetUrunlerWithKategoriDTO>> GetUrunlerWithKategoriAsync()
         {
-            return _urunlerRepository.GetUrunlerWithKategoriAsync();
-
+            var urunVeKategoriList=await   _urunlerRepository.GetUrunlerWithKategoriAsync();
+            var urunVeKategoriDTO = _mapper.Map<List<GetUrunlerWithKategoriDTO>>(urunVeKategoriList);
+            return urunVeKategoriDTO;
         }
 
-        public Task<Urunler> GetUrunlerWithKategoriAsync(int urunlerId)
+        public async Task<GetUrunlerWithKategoriDTO> GetUrunlerWithKategoriAsync(int urunlerId)
         {
-            throw new NotImplementedException();
+            var urunVeKategori = await _urunlerRepository.GetUrunlerWithKategoriAsync(urunlerId);
+            var urunVeKategoriDTO = _mapper.Map<GetUrunlerWithKategoriDTO>(urunVeKategori);
+            return urunVeKategoriDTO;
         }
 
         public Task<Urunler> GetUrunlerWithKategoriAsync(Urunler kategori)

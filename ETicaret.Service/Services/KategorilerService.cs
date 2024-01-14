@@ -12,8 +12,13 @@ namespace ETicaret.Service.Services
 {
     public class KategorilerService : Service<Kategoriler>, IKategoriService
     {
-        public KategorilerService(IGenericRepository<Kategoriler> repository, IUnitOfWork unitOfWork) : base(repository, unitOfWork)
+        private readonly IGenericRepository<Kategoriler> _kategoryRepo;
+        private readonly IUnitOfWork _unitOfWork;
+        public KategorilerService(IGenericRepository<Kategoriler> kategoriRepo, IUnitOfWork unitOfWork) : base(kategoriRepo, unitOfWork)
         {
+            _kategoryRepo= kategoriRepo;
+            _unitOfWork= unitOfWork;
+
         }
 
         public Task<List<Kategoriler>> GetKategorilerWithUrunler()
@@ -24,6 +29,12 @@ namespace ETicaret.Service.Services
         public Task<Kategoriler> GetKategorilerWithUrunler(int kategorilerId)
         {
             throw new NotImplementedException();
+        }
+
+        public IQueryable<Kategoriler> KategoriListesi()
+        {
+            return _kategoryRepo.GetAll();
+
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using ETicaret.Core.ETicaretDatabase;
+﻿using ETicaret.Core.DTO;
+using ETicaret.Core.ETicaretDatabase;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,9 +10,9 @@ namespace ETicaret.Core.IService
 {
     public interface IUrunlerService : IService<Urunler>
     {
-        Task<List<Urunler>> GetUrunlerWithKategoriAsync();
+        Task<List<GetUrunlerWithKategoriDTO>> GetUrunlerWithKategoriAsync();
 
-        Task<Urunler> GetUrunlerWithKategoriAsync(int urunlerId);
+        Task<GetUrunlerWithKategoriDTO> GetUrunlerWithKategoriAsync(int urunlerId);
 
         Task<Urunler> GetUrunlerWithKategoriAsync(Urunler kategori);
     }
