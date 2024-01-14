@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace ETicaret.Repository.Migrations
 {
     /// <inheritdoc />
-    public partial class ilkmigration : Migration
+    public partial class initialilkdeneme : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -170,6 +170,8 @@ namespace ETicaret.Repository.Migrations
                     KullaniciSifre = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     PersonelMi = table.Column<bool>(type: "bit", nullable: false),
                     YetkiId = table.Column<int>(type: "int", nullable: false),
+                    MusteriId = table.Column<int>(type: "int", nullable: false),
+                    PersonelId = table.Column<int>(type: "int", nullable: false),
                     AktifMi = table.Column<bool>(type: "bit", nullable: false),
                     EklenmeTarih = table.Column<DateTime>(type: "datetime2", nullable: false),
                     GuncellenmeTarih = table.Column<DateTime>(type: "datetime2", nullable: true),
@@ -280,6 +282,7 @@ namespace ETicaret.Repository.Migrations
                     CalistigiFirma = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     PersonelHakkinda = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: false),
                     YasadigiSehir = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    kullaniciId = table.Column<int>(type: "int", nullable: false),
                     PersonelKullaniciBilgileriId = table.Column<int>(type: "int", nullable: false),
                     KullanicilarId = table.Column<int>(type: "int", nullable: true),
                     AktifMi = table.Column<bool>(type: "bit", nullable: false),

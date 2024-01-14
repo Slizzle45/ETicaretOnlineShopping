@@ -11,13 +11,28 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="7.0.0" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="7.0.11" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\ETicaret.Core\ETicaret.Core.csproj" />
     <ProjectReference Include="..\ETicaret.Repository\ETicaret.Repository.csproj" />
     <ProjectReference Include="..\ETicaret.Service\ETicaret.Service.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Areas\AdminPanel\Data\" />
+    <Folder Include="Areas\AdminPanel\Models\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="Areas\AdminPanel\Views\AdminAnasayfa\AdminAnasayfaIndex.cshtml" />
+    <None Include="Areas\AdminPanel\Views\Shared\AdminLayout.cshtml" />
+    <None Include="Areas\AdminPanel\Views\Shared\_AdminLayout.cshtml" />
+    <None Include="Areas\AdminPanel\Views\Urunler\UrunGuncelleIndex.cshtml" />
+    <None Include="Areas\AdminPanel\Views\Urunler\UrunKaydetIndex.cshtml" />
+    <None Include="Areas\AdminPanel\Views\Urunler\UrunlerIndex.cshtml" />
+    <None Include="Areas\AdminPanel\Views\Urunler\UrunSilIndex.cshtml" />
   </ItemGroup>
 
 </Project>

@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ETicaret.Repository.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20240110152508_ilk_migration")]
-    partial class ilkmigration
+    [Migration("20240113131638_initial_ilk_deneme")]
+    partial class initialilkdeneme
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -265,6 +265,12 @@ namespace ETicaret.Repository.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("MusteriId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("PersonelId")
+                        .HasColumnType("int");
+
                     b.Property<bool>("PersonelMi")
                         .HasColumnType("bit");
 
@@ -447,6 +453,9 @@ namespace ETicaret.Repository.Migrations
                     b.Property<string>("YasadigiSehir")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("kullaniciId")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
