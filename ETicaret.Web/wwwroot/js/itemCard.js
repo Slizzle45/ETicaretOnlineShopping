@@ -1,4 +1,5 @@
 ﻿document.addEventListener("DOMContentLoaded", function () {
+    console.log('itemCard.js loaded');
 
     var itemCard = document.querySelectorAll('.card');
 
@@ -40,5 +41,4 @@
         });
     });
 
-    showSuccessAlert();
 });
