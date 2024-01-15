@@ -48,22 +48,21 @@
                         </ul>
                     </li>
                 </ul>
-                <div class="d-flex ms-4">
+                <div class="d-flex">
                     <!--Login-->
-                    <button class="btn btn-outline-dark" data-toggle="modal" data-target="#modalLoginForm">
+                    <button id="loginBtn" class="btn btn-outline-dark">
                         <i class="bi bi-person-circle"></i>
                         Login
                     </button>
-                </div>
-                <!--LOGIN MODAL-->
-                <div class="container">
+
+                    <!--LOGIN MODAL-->
                     <div class="modal fade" id="modalLoginForm" tabindex="-1" role="dialog" aria-labelledby="modalLoginForm"
                          aria-hidden="true">
                         <div class="modal-dialog" role="document">
                             <div class="modal-content">
                                 <div class="modal-header text-center">
                                     <h4 class="modal-title w-100 font-weight-bold">Giriş Yap</h4>
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
                                         <span aria-hidden="true">&times;</span>
                                     </button>
                                 </div>
@@ -93,18 +92,20 @@
                         </div>
                     </div>
                     <!--loginmodal-->
-                </div>
-                <!---->
-                <div class="container">
-                    <div class="dd-flex ms-4">
-                        <button id="cart" class="btn btn-outline-dark" type="button" href="#">
-                            <i class="bi-cart-fill me-1"></i>
-                            Cart
-                            <span class="badge bg-dark text-white ms-1 rounded-pill">0</span>
-                        </button>
-                        <!--partial-->
 
-                    </div>
+                    <button id="cart" class="btn btn-outline-dark" type="button" href="#">
+                        <i class="bi-cart-fill me-1"></i>
+                        Cart
+                        <span class="badge bg-dark text-white ms-1 rounded-pill">0</span>
+                    </button>
+                    <!--partial-->
+                    <script>
+                        // JavaScript to open the modal
+                        document.getElementById('loginBtn').addEventListener('click', function () {
+                            var myModal = new bootstrap.Modal(document.getElementById('modalLoginForm'));
+                            myModal.show();
+                        });
+                    </script>
                 </div>
             </div>
         </div>
