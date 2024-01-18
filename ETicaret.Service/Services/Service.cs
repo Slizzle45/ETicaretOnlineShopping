@@ -79,5 +79,15 @@ namespace ETicaret.Service.Services
             await _unitOfWork.CommitAsync();
 
         }
+
+        public async Task<IEnumerable<TEntity>> GetAllQueryAsync(Expression<Func<TEntity, bool>> expression)
+        {
+            return await _repository.GetAllQueryAsync(expression);
+        }
+
+        //public async Task<IEnumerable<TEntity>> Find(Expression<Func<TEntity, bool>> predicate)
+        //{
+        //    return await _repository.Find(predicate);
+        //}
     }
 }

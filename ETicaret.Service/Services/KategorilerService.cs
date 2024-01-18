@@ -14,11 +14,12 @@ namespace ETicaret.Service.Services
     {
         private readonly IGenericRepository<Kategoriler> _kategoryRepo;
         private readonly IUnitOfWork _unitOfWork;
-        public KategorilerService(IGenericRepository<Kategoriler> kategoriRepo, IUnitOfWork unitOfWork) : base(kategoriRepo, unitOfWork)
+        private readonly IKategoriRepository _kategoriRepository;
+        public KategorilerService(IGenericRepository<Kategoriler> kategoriRepo, IUnitOfWork unitOfWork, IKategoriRepository kategoriRepository) : base(kategoriRepo, unitOfWork)
         {
-            _kategoryRepo= kategoriRepo;
-            _unitOfWork= unitOfWork;
-
+            _kategoryRepo = kategoriRepo;
+            _unitOfWork = unitOfWork;
+            _kategoriRepository = kategoriRepository;
         }
 
         public Task<List<Kategoriler>> GetKategorilerWithUrunler()
@@ -35,6 +36,16 @@ namespace ETicaret.Service.Services
         {
             return _kategoryRepo.GetAll();
 
+        }
+
+        public async Task<object> KategoriSilAsync(int id)
+        {
+            var kategoriGetir = await _kategoriRepository.GetByIdAsync(id);
+            if (kategoriGetir != null)
+            {
+                return await _kategoriRepository.KategoriSilAsync(kategoriGetir.Id);
+            }
+            return null;
         }
     }
 }

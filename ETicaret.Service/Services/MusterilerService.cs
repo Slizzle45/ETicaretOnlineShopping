@@ -1,4 +1,6 @@
-﻿using ETicaret.Core.ETicaretDatabase;
+﻿using AutoMapper;
+using ETicaret.Core.DTO;
+using ETicaret.Core.ETicaretDatabase;
 using ETicaret.Core.IRepositories;
 using ETicaret.Core.IService;
 using ETicaret.Core.IUnitOfWork;
@@ -13,39 +15,55 @@ namespace ETicaret.Service.Services
 {
     public class MusterilerService : Service<Musteriler>, IMusterilerService
     {
-        public MusterilerService(IGenericRepository<Musteriler> repository, IUnitOfWork unitOfWork) : base(repository, unitOfWork)
-        {
+        private readonly IMusterilerRepository _musterilerRepository;
+        private readonly IMapper _mapper;
 
+        public MusterilerService(IGenericRepository<Musteriler> repository, IUnitOfWork unitOfWork, IMusterilerRepository musterilerRepository, IMapper mapper) : base(repository, unitOfWork)
+        {
+            _musterilerRepository = musterilerRepository;
+            _mapper = mapper;
         }
 
-        public async Task<IEnumerable<Musteriler>> GetMusteriWithAdresAsync()
+        public async Task<IEnumerable<GetMusterilerWithAdresDTO>> GetMusteriWithAdresAsync()
         {
-            return await GetAllAsyncs();
+            var musteriWithAdres = await _musterilerRepository.GetMusteriWithAdresAsync();
+            var musteriAdresDTO = _mapper.Map<List<GetMusterilerWithAdresDTO>>(musteriWithAdres);
+            return musteriAdresDTO;
         }
 
-        public async Task<Musteriler> GetMusteriWithAdresAsync(int musteriID)
+        public async Task<GetMusterilerWithAdresDTO> GetMusteriWithAdresAsync(int musteriID)
         {
-            return await GetAllQuery(m => m.Id == musteriID).Include(m => m.Adresler).FirstOrDefaultAsync();
+            var musteriWithAdres = await _musterilerRepository.GetMusteriWithAdresAsync(musteriID);
+            var musteriAdresDTO = _mapper.Map<GetMusterilerWithAdresDTO>(musteriWithAdres);
+            return musteriAdresDTO;
         }
 
-        public async Task<IEnumerable<Musteriler>> GetMusteriWithKullaniciAsync()
+        public async Task<IEnumerable<GetMusteriWithKullaniciDTO>> GetMusteriWithKullaniciAsync()
         {
-            return await GetAllAsyncs();
+            var musteriWithKullanici = await _musterilerRepository.GetMusteriWithKullaniciAsync();
+            var musteriKullaniciDTO = _mapper.Map<List<GetMusteriWithKullaniciDTO>>(musteriWithKullanici);
+            return musteriKullaniciDTO;
         }
 
-        public async Task<Musteriler> GetMusteriWithKullaniciAsync(int musteriID)
+        public async Task<GetMusteriWithKullaniciDTO> GetMusteriWithKullaniciAsync(int musteriID)
         {
-            return await GetAllQuery(m => m.Id == musteriID).Include(m => m.Kullanicilar).FirstOrDefaultAsync();
+            var musteriWithKullanici = await _musterilerRepository.GetMusteriWithKullaniciAsync(musteriID);
+            var musteriKullaniciDTO = _mapper.Map<GetMusteriWithKullaniciDTO>(musteriWithKullanici);
+            return musteriKullaniciDTO;
         }
 
-        public async Task<IEnumerable<Musteriler>> GetMusteriWithSiparisAsync()
+        public async Task<IEnumerable<GetMusteriWithSiparisDTO>> GetMusteriWithSiparisAsync()
         {
-            return await GetAllAsyncs();
+            var musteriWithSiparis = await _musterilerRepository.GetMusteriWithSiparisAsync();
+            var musteriSiparisDTO = _mapper.Map<List<GetMusteriWithSiparisDTO>>(musteriWithSiparis);
+            return musteriSiparisDTO;
         }
 
-        public async Task<Musteriler> GetMusteriWithSiparisAsync(int musteriID)
+        public async Task<GetMusteriWithSiparisDTO> GetMusteriWithSiparisAsync(int musteriID)
         {
-            return await GetAllQuery(m => m.Id == musteriID).Include(m => m.Siparisler).FirstOrDefaultAsync();
+            var musteriWithSiparis = await _musterilerRepository.GetMusteriWithSiparisAsync(musteriID);
+            var musteriSiparisDTO = _mapper.Map<GetMusteriWithSiparisDTO>(musteriWithSiparis);
+            return musteriSiparisDTO;
         }
 
         public async Task<IEnumerable<Musteriler>> MusteriListesiAsync()
