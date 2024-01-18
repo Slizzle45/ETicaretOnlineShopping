@@ -19,7 +19,7 @@ namespace ETicaret.Repository.Configurations
             builder.Property(k => k.Adres).IsRequired().HasMaxLength(500);
             builder.Property(k => k.PostaKodu).IsRequired(false);
             //builder.HasOne(k => k.Iller).WithOne(k => k.Adresler);
-            builder.HasOne(k => k.Ilce).WithMany(k => k.Adresler).HasForeignKey(k=>k.IlceKod);
+            builder.HasOne(k => k.Ilce).WithMany(k => k.Adresler).HasForeignKey(k=>k.IlceKodu);
             builder.HasOne(k => k.Musteriler).WithMany(k => k.Adresler).HasForeignKey(k => k.MusteriId);
             //***********************************
             /*

@@ -25,7 +25,7 @@ namespace ETicaret.Repository.Configurations
             builder.HasMany(k => k.SiparisDetay).WithOne(k => k.Urunler).HasForeignKey(k => k.UrunId);
             builder.HasMany(k => k.Yorumlar).WithOne(k => k.Urunler).HasForeignKey(k => k.UrunId);
             builder.HasMany(k => k.Fotograflar).WithOne(k => k.Urunler).HasForeignKey(k => k.UrunId);
-
+            
 
         }
     }
