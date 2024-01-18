@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace ETicaret.Web.Controllers
 {
-    public class AnasayfaController : Controller
+    public class AnasayfaController : BaseDefaultController
     {
         //private readonly ISepetlerService _sepetlerService;
         private readonly IYorumlarService _yorumlarService;

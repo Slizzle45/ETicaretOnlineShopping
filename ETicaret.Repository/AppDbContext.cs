@@ -34,7 +34,7 @@ namespace ETicaret.Repository
         public DbSet<Personeller> Personeller { get; set; }
         public DbSet<SiparisDetay> SiparisDetay { get; set; }
         public DbSet<Siparisler> Siparisler { get; set; }
-        public DbSet<Tedarikciler> Tedarikciler { get; set; }
+        //public DbSet<Tedarikciler> Tedarikciler { get; set; }
         public DbSet<YetkiErisim> YetkiErisim { get; set; }
         public DbSet<Yetkiler> Yetkiler { get; set; }
         public DbSet<Yorumlar> Yorumlar { get; set; }

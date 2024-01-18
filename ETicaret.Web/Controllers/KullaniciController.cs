@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace ETicaret.Web.Controllers
 {
-    public class KullaniciController :Controller
+    public class KullaniciController :BaseDefaultController
     {
        
        private readonly IKullanicilarRepository _kullaniciRepo;

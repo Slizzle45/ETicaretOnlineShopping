@@ -2,7 +2,7 @@
 
 namespace ETicaret.Web.Controllers
 {
-    public class KullaniciGirisController : Controller
+    public class KullaniciGirisController : BaseDefaultController
     {
         public IActionResult Index()
         {

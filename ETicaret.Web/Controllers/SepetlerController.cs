@@ -2,7 +2,7 @@
 
 namespace ETicaret.Web.Controllers
 {
-    public class SepetlerController : Controller
+    public class SepetlerController : BaseDefaultController
     {
         public IActionResult Index()
         {
