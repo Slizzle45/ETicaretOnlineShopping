@@ -12,14 +12,17 @@ namespace ETicaret.Repository
 {
     public class AppDbContext : DbContext
     {
+        public AppDbContext()
+        {
+        }
 
         public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)
         {
 
         }
 
-        public DbSet<Urunler> Urunler { get ; set; }
-        public DbSet<Kategoriler> Kategoriler { get ; set; }
+        public DbSet<Urunler> Urunler { get; set; }
+        public DbSet<Kategoriler> Kategoriler { get; set; }
         public DbSet<Adresler> Adresler { get; set; }
         public DbSet<Iller> Iller { get; set; }
         public DbSet<Ilceler> Ilceler { get; set; }
@@ -35,6 +38,16 @@ namespace ETicaret.Repository
         public DbSet<YetkiErisim> YetkiErisim { get; set; }
         public DbSet<Yetkiler> Yetkiler { get; set; }
         public DbSet<Yorumlar> Yorumlar { get; set; }
+        public DbSet<Sp_AdreslerWithMusteriDto> AdresMusteri { get; set; }
+        //public DbSet<Sepetler> Sepetler { get; set; }
+
+        public async Task<List<Sp_AdreslerWithMusteriDto>> Sp_AdresMusteri()
+        {
+            var result = await AdresMusteri.FromSqlRaw("EXEC Sp_GetMusteriAdresBilgileri").ToListAsync();
+
+            return result;
+        }
+
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -46,6 +59,12 @@ namespace ETicaret.Repository
             modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());//Bütün Configuration class'ları kalıtım aldığı IEntityTypeConfiguration, EntityTypeBuilder yapılarını dahil ederek create işlemi gerçekleştirir.
 
             base.OnModelCreating(modelBuilder);
+
+            modelBuilder.Entity<Sp_AdreslerWithMusteriDto>(entity =>
+            {
+                entity.HasNoKey();
+            });
+
         }
 
 
