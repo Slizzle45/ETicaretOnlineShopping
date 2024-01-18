@@ -34,12 +34,12 @@ namespace ETicaret.Repository
         public DbSet<Personeller> Personeller { get; set; }
         public DbSet<SiparisDetay> SiparisDetay { get; set; }
         public DbSet<Siparisler> Siparisler { get; set; }
-        //public DbSet<Tedarikciler> Tedarikciler { get; set; }
+        public DbSet<Tedarikciler> Tedarikciler { get; set; }
         public DbSet<YetkiErisim> YetkiErisim { get; set; }
         public DbSet<Yetkiler> Yetkiler { get; set; }
         public DbSet<Yorumlar> Yorumlar { get; set; }
         public DbSet<Sp_AdreslerWithMusteriDto> AdresMusteri { get; set; }
-        //public DbSet<Sepetler> Sepetler { get; set; }
+        public DbSet<Sepetler> Sepetler { get; set; }
 
         public async Task<List<Sp_AdreslerWithMusteriDto>> Sp_AdresMusteri()
         {
