@@ -13,12 +13,25 @@ namespace ETicaret.API.Controllers
     {
         private readonly IService<Urunler> _service;
         private readonly IMapper _mapper;//AutoMapper için eklenen kütüphanede DI kullanılması için IMapper  kütüphane içinde geliyor.
+        readonly IUrunlerService _urunService;
 
-        public UrunlerController(IService<Urunler> service, IMapper mapper)
+        public UrunlerController(IService<Urunler> service, IMapper mapper,IUrunlerService urunlerService)
         {
             _service = service;
             _mapper = mapper;
+            _urunService = urunlerService;
         }
+
+
+        /// GET api/Urunler/GetUrunlerWithKategori
+        [HttpGet("[action]")]//Test için yapıldı
+        public async Task<IActionResult> GetUrunlerWithKategori()
+        {
+
+            return ResultAPI(await _urunService.GetUrunlerWithKategoriAsync());
+        }
+
+
 
         [HttpGet]
         public async Task<IActionResult> UrunlerIndex()

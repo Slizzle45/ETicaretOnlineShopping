@@ -9,7 +9,7 @@ namespace ETicaret.API.Controllers
 {
     [Route("api/[Controller]")]
     [ApiController]
-    public class YorumlarController : Controller
+    public class YorumlarController : BaseController
     {
         private readonly IService<Yorumlar> _service;
         private readonly IMapper _mapper;
@@ -50,7 +50,7 @@ namespace ETicaret.API.Controllers
                 return NoContent();
             }
 
-            return Ok();
+            return ResultAPI(yorumUpdateDTO);
         }
     
     }

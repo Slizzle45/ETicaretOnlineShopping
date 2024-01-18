@@ -33,17 +33,18 @@ namespace ETicaret.API.Controllers
 
             var mapEkle = _mapper.Map<FotograflarDTO>(fotografKaydet);
 
-            return Ok(mapEkle);
+            return Ok(fotografEkleDTO);
         }
 
-        [HttpPut]
+        [HttpPut("FotograflarGuncelle")]
         public async Task<IActionResult> FotografGuncelle(FotografGuncelleDTO fotografGuncelleDTO)
         {
-            var fotografGuncelle = _service.GetByIdAsync(fotografGuncelleDTO.Id);
+            var fotografGuncelle = await _service.GetByIdAsync(fotografGuncelleDTO.Id);
 
             if (fotografGuncelle != null)
             {
                 await _service.UpdateAsync(_mapper.Map<Fotograflar>(fotografGuncelleDTO));
+                return Ok();
             }
             else
             {
@@ -53,14 +54,14 @@ namespace ETicaret.API.Controllers
             return Ok();
         }
 
-        [HttpDelete("{Id}")]
-        public async Task<IActionResult> FotografSil(FotografSilDTO fotografSilDTO) // ?
+        [HttpDelete]
+        public async Task<IActionResult> FotografSil(int id)
         {
-            var fotografSil = await _service.GetByIdAsync(fotografSilDTO.Id);
+            var fotografSil = await _service.GetByIdAsync(id);
 
             if (fotografSil != null)
             {
-                await _service.RemoveAsync(_mapper.Map<Fotograflar>(fotografSilDTO));
+                await _service.RemoveAsync(fotografSil);
 
                 return Ok();
             }
@@ -68,6 +69,24 @@ namespace ETicaret.API.Controllers
             {
                 return NoContent();
             }
+        }
+
+        [HttpGet("FotografGetById/{id}")]
+        public async Task<IActionResult> FotografGetById(int id)
+        {
+            var getFotograf = await _service.GetByIdAsync(id);
+
+            return Ok(getFotograf);
+        }
+
+        [HttpGet("GetFotograflarWithUrunler")]
+        public async Task<IActionResult> GetFotograflarWithUrunler()
+        {
+            var fotograflar = await _service.GetAllAsyncs();
+
+            var fotograflarDTO = _mapper.Map<List<GetFotograflarWithUrunlerDTO>>(fotograflar);
+
+            return Ok(fotograflarDTO);
         }
     }
 }
