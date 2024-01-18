@@ -12,7 +12,7 @@ namespace ETicaret.Core.ETicaretDatabase
         public string Adres { get; set; }
         public string PostaKodu { get; set; }
         public int IlKodu { get; set; }
-        public int IlceKod { get; set; }
+        public int IlceKodu { get; set; }
         public int MusteriId { get; set; }
        // public Iller Iller { get; set; }
         public Ilceler Ilce { get; set; }
