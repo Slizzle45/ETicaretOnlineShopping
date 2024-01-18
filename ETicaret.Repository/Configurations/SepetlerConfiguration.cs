@@ -29,5 +29,9 @@ namespace ETicaret.Repository.Configurations
         //    //builder.HasMany(k => k.Siparisler).WithOne(k => k.Sepetler).HasForeignKey(k => k.SepetId);
         //    //builder.HasOne(k => k.kullanicilar).WithMany(k => k.Sepetler).HasForeignKey(k => k.KullaniciId);
         //}
+        public void Configure(EntityTypeBuilder<Sepetler> builder)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
