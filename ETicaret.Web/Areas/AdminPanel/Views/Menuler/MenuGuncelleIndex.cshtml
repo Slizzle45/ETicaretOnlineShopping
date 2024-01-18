@@ -1,0 +1,161 @@
+﻿@using ETicaret.Core.ETicaretDatabase
+@using ETicaret.Core.DTO
+
+@model Tuple<List<ErisimAlanlari>, GetMenulerWithErisimAlanDTO>
+
+
+<div class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+            </div>
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item"><a href="~/AdminPanel/Menuler/MenulerIndex">Menü Listesi</a></li>
+                    <li class="breadcrumb-item active">Menü Güncelle</li>
+                </ol>
+            </div><!-- /.col -->
+        </div><!-- /.row -->
+    </div><!-- /.container-fluid -->
+</div>
+<!-- /.content-header -->
+<!-- Main content -->
+
+<section class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <!-- left column -->
+            <div class="col-md-12">
+                <!-- jquery validation -->
+                <div class="card card-primary">
+                    <div class="card-header">
+                        <h3 class="card-title">Menü Güncelle</h3>
+                    </div>
+                    <!-- /.card-header -->
+                    <!-- form start -->
+                    <form asp-action="MenuGuncelleIndex" id="menuGuncelleIndex" asp-controller="Menuler" method="post">
+
+                        <div class="card-body">
+
+
+                            <div class="form-group">
+                                <label asp-for="MenuAdi">Menü Adı</label>
+                                <input name="MenuAdi" asp-for="MenuAdi" type="text" class="form-control" value="@Model.Item2.MenuAdi" placeholder="Menü Adı">
+                                <span asp-validation-for="MenuAdi" class="text-danger"></span>
+                            </div>
+
+                            <div class="form-group">
+                                <label asp-for="MenuSirasi">Menü Sırası</label>
+                                <input name="MenuSirasi" asp-for="MenuSirasi" type="number" class="form-control" placeholder="Menü Sırası" value="@Model.Item2.MenuSirasi">
+                                <span asp-validation-for="MenuSirasi" class="text-danger"></span>
+                            </div>
+
+                            <div class="form-group">
+                                <label asp-for="UstMenuId">Üst Menü</label>
+                                <select name="UstMenuId" asp-for="UstMenuId" class="form-control">
+
+                                    <option value="@Model.Item2.UstMenuId" selected>@Model.Item2.MenuAdi</option>
+                                    @foreach (var item in ViewBag.menuler)
+                                    {
+                                        <option value="@item.Id">@item.MenuAdi</option>
+                                    }
+
+                                </select>
+                                <span asp-validation-for="UstMenuId" class="text-danger"></span>
+                            </div>
+
+                            <div class="form-group">
+                                <label asp-for="ErisimAlanlariId">Erişim Alanları</label>
+                                <select name="ErisimAlanlariId" asp-for="ErisimAlanlariId" class="form-control">
+
+                                    <option selected value="@Model.Item2.ErisimAlanlari.Id">
+                                        @{
+                                            string erisimAlani = Model.Item2.ErisimAlanlari.ControllerAdi + "/" + Model.Item2.ErisimAlanlari.ViewAdi;
+                                        }
+                                        @erisimAlani
+                                    </option>
+
+                                    @foreach (var item in Model.Item1)
+                                    {
+                                        <option value="@item.Id">
+                                            @{
+                                                string erisimAlani2 = item.ControllerAdi + "/" + item.ViewAdi;
+                                            }
+                                            @erisimAlani2
+                                        </option>
+                                    }
+
+                                </select>
+                                <span asp-validation-for="ErisimAlanlariId" class="text-danger"></span>
+                            </div>
+
+
+                            <div class="form-group">
+                                <label asp-for="Aciklama">Menü Açıklama</label>
+                                <input name="Aciklama" asp-for="Aciklama" type="text" class="form-control" placeholder="Menü Açıklaması" value="@Model.Item2.Aciklama">
+                                <span asp-validation-for="Aciklama" class="text-danger"></span>
+                            </div>
+
+                        </div>
+
+                        <!-- /.card-body -->
+                        <div class="card-footer">
+                            <input type="submit" class="btn btn-warning" value="Menü Güncelle" />
+                        </div>
+                        <div>
+                            @Html.Raw(TempData["hataMesaji"])
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+@section addBottomLibrary {
+
+    <script src="~/AdminLTE/plugins/jquery-validation/jquery.validate.js"></script>
+    <script>
+        $(function () {
+
+            $('#urunKeydetIndex').validate({
+                rules: {
+                    makaleKategori: {
+                        required: true
+                    },
+                    makaleBaslik: {
+                        required: true
+                    },
+                    makaleIcerik: {
+                        required: true
+                    }
+
+                },
+                messages: {
+                    makaleKategori: {
+                        required: "Makale Kategori alanı zorunludur"
+                    },
+                    makaleBaslik: {
+                        required: "Başlık alanı zorunludur"
+                    },
+                    makaleIcerik: {
+                        required: "Makale İçerik alanı zorunludur"
+                    }
+                },
+                errorElement: 'span',
+                errorPlacement: function (error, element) {
+                    error.addClass('invalid-feedback');
+                    element.closest('.form-group').append(error);
+                },
+                highlight: function (element, errorClass, validClass) {
+                    $(element).addClass('is-invalid');
+                },
+                unhighlight: function (element, errorClass, validClass) {
+                    $(element).removeClass('is-invalid');
+                }
+            });
+        });
+
+    </script>
+}
+

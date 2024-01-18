@@ -52,6 +52,7 @@
                                     <th>EKLENME TARİHİ</th>
                                     <th>GÜNCELLEME TARİHİ</th>
                                     <th>AKTİF Mİ</th>
+                                    <th>AÇIKLAMA</th>
                                     <th>ONAYLAYAN</th>
                                     <th>GNCL</th>
                                     <th>SİL</th>
@@ -86,6 +87,7 @@
                                             }
                                             @durum
                                         </td>
+                                        <td>@item.Aciklama</td>
                                         <td>@item.KullaniciAdiSoyadi</td>
 
                                         <td>
@@ -96,7 +98,7 @@
 
                                         <td>
                                             @*@Html.ActionLink("Sil", "#", "", new { @class = "btn btn-sm fas fas fa-trash" })*@
-                                            <a href='~/AdminPanel/Urunler/UrunGuncelleIndex/@item.Id' class='btn btn-sm btn-danger'><i class='fas fas fa-trash'></i></a>
+                                            <a href='~/AdminPanel/Urunler/UrunSilIndex/@item.Id' class='btn btn-sm btn-danger'><i class='fas fas fa-trash'></i></a>
                                         </td>
                                     </tr>
                                 }

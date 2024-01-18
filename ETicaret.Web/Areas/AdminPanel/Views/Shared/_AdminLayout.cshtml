@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿@using ETicaret.Web.Models
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8">
@@ -212,30 +213,40 @@
                         <!-- Add icons to the links using the .nav-icon class
                         with font-awesome or any other icon font library -->
 
-
-                        <li class="nav-item">
-                            <a href="#" class="nav-link">
+                         <li class="nav-item">
+                            <a href="~/AdminPanel/Urunler/UrunlerIndex" class="nav-link">
                                 <i class="nav-icon far fa-circle text-info"></i>
-                                <p class="text">Adresler</p>
+                                <p>Ürünler</p>
                             </a>
                         </li>
-                        <li class="nav-item">
-                            <a href="#" class="nav-link">
-                                <i class="nav-icon far fa-circle text-info"></i>
-                                <p>Erişim Alanlariı</p>
-                            </a>
-                        </li>
+                        @try
+                        {
+                            @* if (Context.Session.GetString("kullaniciYetki").ToString()==YetkilerEnum.Admin.GetHashCode().ToString()) *@
+                            if(true)
+                            {
+                                <li class="nav-item">
+                                    <a href="~/AdminPanel/Adresler/AdreslerIndex" class="nav-link">
+                                        <i class="nav-icon far fa-circle text-info"></i>
+                                        <p class="text">Adresler</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="~/AdminPanel/AdminErisimAlanlari/AdminErisimAlanlariIndex" class="nav-link">
+                                        <i class="nav-icon far fa-circle text-info"></i>
+                                        <p>Erişim Alanlariı</p>
+                                    </a>
+                                </li>
 
 
-                        <li class="nav-item">
-                            <a href="#" class="nav-link">
-                                <i class="nav-icon far fa-circle text-info"></i>
-                                <p>Fotoğraflar</p>
-                            </a>
-                        </li>
+                                <li class="nav-item">
+                                    <a href="~/AdminPanel/Fotograflar/FotograflarIndex" class="nav-link">
+                                        <i class="nav-icon far fa-circle text-info"></i>
+                                        <p>Fotoğraflar</p>
+                                    </a>
+                                </li>
 
                         <li class="nav-item">
-                            <a href="" class="nav-link">
+                            <a href="~/AdminPanel/Kategoriler/KategorilerIndex" class="nav-link">
                                 <i class="nav-icon far fa-circle text-info"></i>
                                 <p>Kategoriler</p>
                             </a>
@@ -247,25 +258,25 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="#" class="nav-link">
+                            <a href="~/AdminPanel/Kullanicilar/KullanicilarIndex" class="nav-link">
                                 <i class="nav-icon far fa-circle text-info"></i>
                                 <p>Kullanıcılar</p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="#" class="nav-link">
+                            <a href="~/AdminPanel/Menuler/MenulerIndex" class="nav-link">
                                 <i class="nav-icon far fa-circle text-info"></i>
                                 <p>Menüler</p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="#" class="nav-link">
+                            <a href="~/AdminPanel/Musteriler/MusterilerIndex" class="nav-link">
                                 <i class="nav-icon far fa-circle text-info"></i>
                                 <p>Müşteriler</p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="#" class="nav-link">
+                            <a href="~/AdminPanel/AdminPersoneller/PersonellerIndex" class="nav-link">
                                 <i class="nav-icon far fa-circle text-info"></i>
                                 <p>Personeller</p>
                             </a>
@@ -289,18 +300,28 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="#" class="nav-link">
+                            <a href="~/AdminPanel/AdminYetkiler/AdminYetkilerIndex" class="nav-link">
                                 <i class="nav-icon far fa-circle text-info"></i>
                                 <p>Yetkiler</p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="#" class="nav-link">
+                            <a href="~/AdminPanel/Yorumlar/YorumlarIndex" class="nav-link">
                                 <i class="nav-icon far fa-circle text-info"></i>
                                 <p>Yorumlar</p>
                             </a>
                         </li>
 
+                            }
+                        }
+                        catch (Exception)
+                        {
+
+                            @Html.ActionLink("Page404Index", "SayfaBulunamadi", "")
+                        }
+                        
+
+                       
                     </ul>
                 </nav>
                 <!-- /.sidebar-menu -->
