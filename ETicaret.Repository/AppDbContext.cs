@@ -67,3 +67,7 @@ namespace ETicaret.Repository
 
         }
 
+
+
+    }
+}
