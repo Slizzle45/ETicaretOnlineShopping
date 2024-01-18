@@ -8,6 +8,12 @@ namespace ETicaret.Core.DTO
 {
     public class FotografGuncelleDTO : BaseListDTO
     {
+        public string FotografYolu { get; set; }
 
+        public string FotografAciklamasi { get; set; }
+
+        public byte? FotografSirasi { get; set; }
+
+        public int UrunId { get; set; }
     }
 }

@@ -19,5 +19,6 @@ namespace ETicaret.Core.DTO
         public string YasadigiSehir { get; set; }
         public int KullaniciBilgileriId { get; set; }
         public int KullaniciId { get; set; }
+        public string  KullaniciAdSoyad { get; set; }
     }
 }

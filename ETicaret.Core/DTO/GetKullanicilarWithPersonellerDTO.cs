@@ -9,8 +9,11 @@ namespace ETicaret.Core.DTO
 {
 	public class GetKullanicilarWithPersonellerDTO:BaseListDTO
 	{
-        public Kullanicilar kullanicilar { get; set; }
-
+        public string Adi { get; set; }
+        public string Soyadi { get; set; }
+        public string Email { get; set; }
+        public string sifre { get; set; }
+        public bool PersonelMi { get; set; }
         public string  PersonelAdi { get; set; }
 
         public string PersonelSoyadi { get; set; }

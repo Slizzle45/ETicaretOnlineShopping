@@ -11,5 +11,6 @@ namespace ETicaret.Core.DTO
         public string Yorum { get; set; }
         public int YorumUstId { get; set; }
         public int UrunId { get; set; }
+        public string UrunAdi { get; set; }
     }
 }

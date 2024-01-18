@@ -14,6 +14,6 @@ namespace ETicaret.Core.DTO
         public decimal UrunFiyat { get; set; }
         public int KategoriId { get; set; }
         public string KategoriAdi{ get; set; }
-
+       
     }
 }

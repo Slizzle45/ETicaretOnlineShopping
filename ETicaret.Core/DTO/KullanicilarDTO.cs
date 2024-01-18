@@ -8,14 +8,14 @@ namespace ETicaret.Core.DTO
 {
 	public class KullanicilarDTO:BaseDTO
 	{
-        public string KullaniciAdi { get; set; }
-        public string KullaniciSoyadi { get; set; }
+        public int Id { get; set; }
+        public string Adi { get; set; }
+        public string Soyadi { get; set; }
         public string KullaniciResim { get; set; }
         public string KullaniciEmail { get; set; }
         public string KullaniciSifre { get; set; }
         public bool PersonelMi { get; set; }
         public int YetkiId { get; set; }
-        public int MusteriId { get; set; }
-        public int PersonelId { get; set; }
+        public string YetkiAdi { get; set; }
     }
 }

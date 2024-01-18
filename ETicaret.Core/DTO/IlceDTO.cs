@@ -7,13 +7,11 @@ using System.Threading.Tasks;
 
 namespace ETicaret.Core.DTO
 {
-    public class GetAdreslerWithMusteriDTO :BaseListDTO
+    public class IlceDTO
     {
-        public string AdresBasligi { get; set; }
-        public string Adres { get; set; }
-        public string IlAdi { get; set; }
+        public int IlceKodu { get; set; }
+        public int IlKodu { get; set; }
         public string IlceAdi { get; set; }
-        public IlceDTO Ilce { get; set; }
-
+        public IlDto Iller { get; set; }
     }
 }

@@ -9,10 +9,13 @@ namespace ETicaret.Core.DTO
 {
 	public class GetKullanicilarWithYetkilerDTO:BaseListDTO
 	{
-		public Kullanicilar kullanicilar { get; set; }
+        public string Adi { get; set; }
+        public string Soyadi { get; set; }
+        public string Email { get; set; }
+        public bool PersonelMi { get; set; }
+        public YetkilerDTO yetkiler { get; set; }
+        public int YetkiId { get; set; }
+       
 
-		public Yetkiler yetkiler { get; set; }
-
-		 
-	}
+    }
 }

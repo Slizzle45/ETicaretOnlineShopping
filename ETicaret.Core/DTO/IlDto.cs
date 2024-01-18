@@ -6,9 +6,10 @@ using System.Threading.Tasks;
 
 namespace ETicaret.Core.DTO
 {
-    public class YetkilerDTO
+    public class IlDto
     {
-        public int Id { get; set; }
-        public string YetkiAdi { get; set; }
+        public int IlKodu { get; set; }
+        public string IlAdi { get; set; }
+
     }
 }
