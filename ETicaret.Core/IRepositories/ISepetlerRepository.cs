@@ -7,10 +7,9 @@ using System.Threading.Tasks;
 
 namespace ETicaret.Core.IRepositories
 {
-    public interface IilRepository : IGenericRepository<Iller>
+    public interface ISepetlerRepository:IGenericRepository<Sepetler>
     {
-        Task<List<Iller>> IllerListele();
-        Task<List<Ilceler>> GetIllerWithIlceler(int ilId);
-
+        Task<List<Sepetler>> GetSepetlerWithKullanicilarAsync();
+        Task<Sepetler> GetSepetlerWithKullanicilarAsync(int sepetlerId);
     }
 }

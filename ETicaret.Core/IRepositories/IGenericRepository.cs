@@ -20,6 +20,8 @@ namespace ETicaret.Core.IRepositories
         void Update(TEntity entity);
         void Remove(TEntity entity);
         void RemoveRange(IEnumerable<TEntity> entities);
+        Task<IEnumerable<TEntity>> GetAllQueryAsync(Expression<Func<TEntity, bool>> expression);
+        IEnumerable<TEntity> Find(Expression<Func<TEntity, bool>> predicate);
 
     }
 }

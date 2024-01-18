@@ -13,16 +13,32 @@ namespace ETicaret.Core.IRepositories
 
         //Task<Fotograflar> GetFotograflarWithUrunlerAsync(int fotograflarId);
 
-        Task<int> FotografSayisi(int fotografId);
+        //
 
-        Task<string> FotografEkle(string fotografYolu, string fotografAciklamasi, byte? fotografSirasi, int urunId, bool aktifMi, DateTime eklenmeTarihi);
+        //Task<int> FotografSayisi(int fotografId);
 
-        Task<string> FotografGuncelle(int fotografId, string fotografYolu, string fotografAciklamasi, byte? fotografSirasi, int urunId, bool aktifMi, DateTime eklenmeTarihi, DateTime guncellemeTarihi);
+        //Task<string> FotografEkle(string fotografYolu, string fotografAciklamasi, byte? fotografSirasi, int urunId, bool aktifMi, DateTime eklenmeTarihi);
 
-        Task<string> FotografSil(int fotografId);
+        //Task<string> FotografGuncelle(int fotografId, string fotografYolu, string fotografAciklamasi, byte? fotografSirasi, int urunId, bool aktifMi, DateTime eklenmeTarihi, DateTime guncellemeTarihi);
 
-        Task<List<Fotograflar>> FotografListesi();
+        //Task<string> FotografSil(int fotografId);
 
-        Task<List<Fotograflar>> FotografListesi(bool aktifMi);
+        //Task<List<Fotograflar>> FotografListesi();
+
+        //Task<List<Fotograflar>> FotografListesi(bool aktifMi);
+
+        Task<List<Fotograflar>> GetFotografWithUrunAsync();
+
+        Task<Fotograflar> GetFotografWithUrunAsync(int fotografId);
+
+        Task<string> FotografEkleAsync(string fotografYolu, string fotografAciklamasi, byte fotografSirasi, int urunId, bool aktifMi, DateTime eklemeTarihi, DateTime guncellemeTarihi);
+
+        Task<string> FotografGuncelleAsync(int fotografId, string fotografYolu, string fotografAciklamasi, byte fotografSirasi, int urunId, bool aktifMi, DateTime eklemeTarihi, DateTime guncellemeTarihi);
+
+        Task<string> FotografSilAsync(int fotografId);
+
+        Task<List<Fotograflar>> FotografListesiAsync();
+
+        Task<List<Fotograflar>> FotografListesiAsync(bool aktifMi);
     }
 }

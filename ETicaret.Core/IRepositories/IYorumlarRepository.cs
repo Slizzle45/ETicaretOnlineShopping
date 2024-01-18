@@ -9,8 +9,9 @@ namespace ETicaret.Core.IRepositories
 {
     public interface IYorumlarRepository : IGenericRepository<Yorumlar>
     {
-        Task<IQueryable<Yorumlar>> UrunYorumlari(int urunId);
-        Task<IQueryable<Yorumlar>> KullaniciYorumlari(int kullaniciId);
-
+        Task<List<Yorumlar>> GetYorumlarWithUrunlerAsync();
+        Task<Yorumlar> GetYorumlarWithUrunlerAsync(int urunId);
+        Task<List<Yorumlar>> GetYorumlarWithKullanicilarAsync();
+        Task<Yorumlar> GetYorumlarWithKullanicilarAsync(int kullaniciId);
     }
 }
