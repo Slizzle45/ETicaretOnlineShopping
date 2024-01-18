@@ -16,6 +16,16 @@ namespace ETicaret.Repository.Repositories
         {
         }
 
+        public async Task<List<Menular>> GetMenuWithErisimAlaniAsync()
+        {
+            return await _eTicaretDB.Menular.Include(m => m.ErisimAlanlari).ToListAsync();
+        }
+
+        public async Task<Menular> GetMenuWithErisimAlaniAsync(int menuId)
+        {
+            return await GetAllQuery(m => m.Id == menuId).Include(m => m.ErisimAlanlari).FirstOrDefaultAsync();
+        }
+
         public async Task<List<Menular>> GetMenuWithUstMenuAsync()
         {
             return await _eTicaretDB.Menular.Include(m => m.UstMenu).ToListAsync();

@@ -11,47 +11,10 @@ namespace ETicaret.Repository.Repositories
 {
     public class AdreslerRepository : GenericRepository<Adresler>, IAdreslerRepository
     {
-        private readonly AppDbContext _eTicaret;
+
         public AdreslerRepository(AppDbContext eTicaretDB) : base(eTicaretDB)
         {
-            _eTicaret = eTicaretDB;
-        }
 
-        public async Task<string> AdresEkleAsync(string adresbasligi, string adres, string postaKodu, int ilKodu, int ilceKodu, int musteriId)
-        {
-            try
-            {
-                Adresler adresler = new Adresler();
-                adresler.AdresBasligi = adresbasligi;
-                adresler.Adres = adres;
-                adresler.PostaKodu = postaKodu;
-                adresler.IlKodu = ilKodu;
-                adresler.IlceKod = ilceKodu;
-                await AddAsync(adresler);
-                return "İşlem Başarılı";
-            }
-            catch (Exception ex)
-            {
-                return "İşlem sırasında hata " + ex + "oluştu";
-            }
-        }
-
-        public async Task<string> AdresGuncelleAsync(int id, string adresbasligi, string adres, string postaKodu, int ilKodu, int ilceKodu)
-        {
-            var adresGuncelle = await GetByIdAsync(id);
-            try
-            {
-                adresGuncelle.AdresBasligi = adresbasligi;
-                adresGuncelle.Adres = adres;
-                adresGuncelle.PostaKodu = postaKodu;
-                adresGuncelle.IlKodu = ilKodu;
-                adresGuncelle.IlceKod = ilceKodu;
-                return "İşlem Başarılı";
-            }
-            catch (Exception ex)
-            {
-                return "İşlem sırasında hata " + ex + "oluştu";
-            }
         }
 
         public async Task<List<Adresler>> AdreslerListeleAsync()
@@ -59,23 +22,44 @@ namespace ETicaret.Repository.Repositories
             return await GetAll().ToListAsync();
         }
 
-        public async Task<string> AdresSilAsync(int id)
+        public async Task<List<Sp_AdreslerWithMusteriDto>> AdresVeMusteri()
+        {
+            var adresListe = await _eTicaretDB.Sp_AdresMusteri();
+            return adresListe;
+        }
+
+        public async Task<List<Adresler>> GetAdreslerWithIlcelerAsync(int ilceKodu)
+        {
+            return await _eTicaretDB.Adresler.Include(x => x.Ilce).ThenInclude(ilce => ilce.Iller).Where(a => a.IlceKodu == ilceKodu).ToListAsync();
+        }
+
+        public async Task<List<Adresler>> GetAdreslerWithIlcelerAsync()
+        {
+
+            return await _eTicaretDB.Adresler.Include(k => k.Ilce).ThenInclude(ilce => ilce.Iller).ToListAsync();
+
+        }
+
+        public async Task<Adresler> GetAdreslerWithMusteriAsync(int musteriId)
+        {
+            return await _eTicaretDB.Adresler.Include(k => k.Musteriler).Where(x => x.MusteriId == musteriId).FirstOrDefaultAsync();
+        }
+
+        public async Task<Adresler> GetAdreslerWithMusteriAsync()
+        {
+            return await _eTicaretDB.Adresler.Include(k => k.Musteriler).FirstOrDefaultAsync();
+        }
+
+        public async Task<Adresler> AdresSilAsync(int id)
         {
             var adresSil = await GetByIdAsync(id);
-            try
+            if (adresSil != null)
             {
-                if (adresSil != null)
-                {
-                    Remove(adresSil);
-                    await _eTicaret.SaveChangesAsync();
-                    return "İşlem Başarılı";
-                }
-                return "İşlem Başarısız";
+                adresSil.AktifMi = false;
+                await _eTicaretDB.SaveChangesAsync();
             }
-            catch (Exception ex)
-            {
-                return "İşlem sırasında hata " + ex + "oluştu";
-            }
+
+            return adresSil;
         }
     }
 }

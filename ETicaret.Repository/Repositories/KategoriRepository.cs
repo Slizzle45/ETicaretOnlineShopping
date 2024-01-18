@@ -11,10 +11,8 @@ namespace ETicaret.Repository.Repositories
 {
     public class KategoriRepository : GenericRepository<Kategoriler>, IKategoriRepository
     {
-        private readonly AppDbContext _eTicaret;
         public KategoriRepository(AppDbContext eTicaretDB) : base(eTicaretDB)
         {
-            _eTicaret = eTicaretDB;
         }
 
         public async Task<string> KategoriEkleAsync(string kategoriAdi, string aciklama)
@@ -53,18 +51,16 @@ namespace ETicaret.Repository.Repositories
             return await GetAll().ToListAsync();
         }
 
-        public async Task<string> KategoriSilAsync(int id)
+        public async Task<Kategoriler> KategoriSilAsync(int id)
         {
-            try
+            var kategoriSil = await GetByIdAsync(id);
+            if (kategoriSil != null)
             {
-                var kategoriPasifEt = await GetByIdAsync(id);
-                kategoriPasifEt.AktifMi = false;
-                return "İşlem Başarılı";
+                kategoriSil.AktifMi = false;
+                await _eTicaretDB.SaveChangesAsync(); 
             }
-            catch (Exception ex)
-            {
-                return "İşlem sırasında hata " + ex + "oluştu";
-            }
+
+            return kategoriSil;
         }
     }
 }

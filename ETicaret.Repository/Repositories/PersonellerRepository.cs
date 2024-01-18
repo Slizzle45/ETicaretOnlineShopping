@@ -15,6 +15,16 @@ namespace ETicaret.Repository.Repositories
         {
         }
 
+		public async Task<List<Personeller>> GetPersonellerWithKullanicilarAsync()
+		{
+			return await _eTicaretDB.Personeller.Include(k => k.Kullanicilar).ToListAsync();
+		}
+
+		public async Task<Personeller> GetPersonellerWithKullanicilarAsync(int personellerId)
+		{
+			return await _eTicaretDB.Personeller.Where(k => k.Id == personellerId).Include(k => k.Kullanicilar).FirstOrDefaultAsync();
+		}
+
 		public async Task<string> PersonelEkle(string PersonelAdi, string PersonelSoyadi, string Cinsiyet, decimal Maas, DateTime MaasOdemeTarih, bool MedeniHali, string CalistigiFirma, string Hakkinda, string yasadigiSehir, int personelBilgiId, int kullaniciId)
 		{
 			try
@@ -61,7 +71,7 @@ namespace ETicaret.Repository.Repositories
 				personelGuncelle.AktifMi = aktifMi;
 				personelGuncelle.EklenmeTarih = EklenmeTarihi;
 				personelGuncelle.PersonelKullaniciBilgileriId = personelBilgiId;
-				personelGuncelle.kullaniciId = kullaniciId;
+				personelGuncelle.KullaniciId = kullaniciId;
 
 				return  "Personel güncelleme işlemi başarılı"; 
 			}

@@ -1,4 +1,5 @@
-﻿using ETicaret.Core.ETicaretDatabase;
+﻿using ETicaret.Core.DTO;
+using ETicaret.Core.ETicaretDatabase;
 using ETicaret.Core.IRepositories;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -11,6 +12,7 @@ namespace ETicaret.Repository.Repositories
 {
     public class UrunlerRepository : GenericRepository<Urunler>, IUrunlerRepository
     {
+
         public UrunlerRepository(AppDbContext eTicaretDB) : base(eTicaretDB)
         {
                 
@@ -18,14 +20,15 @@ namespace ETicaret.Repository.Repositories
 
         public async Task<List<Urunler>> GetUrunlerWithKategoriAsync()
         {
-            return await _eTicaretDB.Urunler.Include(k => k.Kategoriler).ToListAsync();
+            return  await _eTicaretDB.Urunler.Include(k => k.Kategoriler).ToListAsync();
             //Eager Loading=>
             //
         }
 
-        public Task<Urunler> GetUrunlerWithKategoriAsync(int urunlerId)
+        public async Task<Urunler> GetUrunlerWithKategoriAsync(int urunlerId)
         {
-            throw new NotImplementedException();
+            return await _eTicaretDB.Urunler.Where(k=>k.Id==urunlerId).Include(k => k.Kategoriler).FirstOrDefaultAsync();
+
         }
 
 

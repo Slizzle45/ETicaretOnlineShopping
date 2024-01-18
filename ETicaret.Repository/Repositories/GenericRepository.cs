@@ -89,5 +89,17 @@ namespace ETicaret.Repository.Repositories
                 throw;
             }
         }
+
+        //SOLID prensiplerine göre aşağıda bir class içinde mevcut yer alan methodların değiştirilmemesi gereklidir ama class'a yeni method eklenebilir
+        //Open/Closed=> içinde ter alan methodlara yeni bir method eklenebilir, olan methodları değiştirmeye kesinlikle kapalı olmalıdır
+        public async Task<IEnumerable<TEntity>> GetAllQueryAsync(Expression<Func<TEntity, bool>> expression)
+        {
+            return await _dbSet.Where(expression).ToListAsync();
+        }
+
+        public IEnumerable<TEntity> Find(Expression<Func<TEntity, bool>> predicate)
+        {
+            return _dbSet.Where(predicate).ToList();
+        }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using ETicaret.Core.ETicaretDatabase;
 using ETicaret.Core.IRepositories;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,14 +16,24 @@ namespace ETicaret.Repository.Repositories
 
         }
 
-        public Task<IQueryable<Yorumlar>> KullaniciYorumlari(int kullaniciId)
+        public async Task<List<Yorumlar>> GetYorumlarWithKullanicilarAsync()
         {
-            throw new NotImplementedException();
+            return await _eTicaretDB.Yorumlar.Include(k => k.Kullanicilar).ToListAsync();
+        }
+        public async Task<Yorumlar> GetYorumlarWithKullanicilarAsync(int yorumId)
+        {
+            return await _eTicaretDB.Yorumlar.Where(k => k.Id == yorumId).Include(k => k.Kullanicilar).FirstOrDefaultAsync();
         }
 
-        public Task<IQueryable<Yorumlar>> UrunYorumlari(int urunId)
+        public async Task<List<Yorumlar>> GetYorumlarWithUrunlerAsync()
         {
-            throw new NotImplementedException();
+            return await _eTicaretDB.Yorumlar.Include(k => k.Urunler).ToListAsync();
         }
+        public async Task<Yorumlar> GetYorumlarWithUrunlerAsync(int yorumId)
+        {
+            return await _eTicaretDB.Yorumlar.Where(k => k.Id == yorumId).Include(k => k.Urunler).FirstOrDefaultAsync();
+        }
+
+        
     }
 }

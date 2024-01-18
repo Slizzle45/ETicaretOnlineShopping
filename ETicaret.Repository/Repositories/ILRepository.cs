@@ -15,14 +15,16 @@ namespace ETicaret.Repository.Repositories
         {
         }
 
-        public async Task<List<Iller>> GetIllerWithIlceler(int ilId)
+        public async Task<List<Ilceler>> GetIllerWithIlceler(int ilId)
         {
-            return await _eTicaretDB.Iller.Include(k => k.Ilceler).ToListAsync();
+            var ilceler = await _eTicaretDB.Iller.Where(il => il.IlKodu == ilId).SelectMany(il => il.Ilceler).ToListAsync();
+            return ilceler;
         }
 
         public async Task<List<Iller>> IllerListele()
         {
             return await GetAll().ToListAsync();
         }
+
     }
 }

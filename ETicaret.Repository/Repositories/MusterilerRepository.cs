@@ -1,4 +1,5 @@
-﻿using ETicaret.Core.ETicaretDatabase;
+﻿using ETicaret.Core.DTO;
+using ETicaret.Core.ETicaretDatabase;
 using ETicaret.Core.IRepositories;
 using Microsoft.EntityFrameworkCore;
 using System;
