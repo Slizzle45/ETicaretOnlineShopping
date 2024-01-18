@@ -31,6 +31,8 @@ namespace ETicaret.Service.Mapping
             CreateMap<Personeller, GetPersonellerWithKullanicilarDTO>().ReverseMap();
             CreateMap<Fotograflar, FotograflarDTO>().ReverseMap();
             CreateMap<Fotograflar, GetFotograflarWithUrunlerDTO>().ReverseMap();
+            CreateMap<Fotograflar, FotografGuncelleDTO>().ReverseMap();
+
             //CreateMap<Urunler, GetUrunlerWithKategoriDTO>().ReverseMap();
             CreateMap<Siparisler, GetSiparislerWithMusterilerDTO>().ReverseMap();
 
@@ -57,6 +59,10 @@ namespace ETicaret.Service.Mapping
             CreateMap<Adresler, AdreslerAddDTO>().ReverseMap();
             CreateMap<Adresler, AdreslerUpdateDTO>().ReverseMap();
             CreateMap<Kategoriler, KategoriDTO>().ReverseMap();
+            CreateMap<Iller, IlDto>().ReverseMap();
+            CreateMap<Ilceler, IlceDTO>().ReverseMap();
+
+
 
         }
 
