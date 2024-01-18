@@ -11,6 +11,6 @@ namespace ETicaret.Core.IService
     {
         Task<string> YetkiErisimEkle(int erisimAlaniId, int yetkiId, string aciklama);
         Task<string> YetkiErisimSil(int erisimAlaniId, int yetkiId);
-        Task<List<YetkiErisim>> YetkiErisimListesi();
+        Task<List<YetkiErisim>> YetkiErisimleri();
     }
 }

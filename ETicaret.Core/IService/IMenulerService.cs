@@ -1,4 +1,5 @@
-﻿using ETicaret.Core.ETicaretDatabase;
+﻿using ETicaret.Core.DTO;
+using ETicaret.Core.ETicaretDatabase;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,11 +10,13 @@ namespace ETicaret.Core.IService
 {
     public interface IMenulerService : IService<Menular>
     {
-        Task<IEnumerable<Menular>> GetMenulerWithUstMenuAsync();
+        Task<IEnumerable<GetMenulerWithErisimAlanDTO>> GetMenulerWithErisimAlanAsync();
+        Task<GetMenulerWithErisimAlanDTO> GetMenulerWithErisimAlanAsync(int menuId);
         Task<Menular> GetMenuWithUstMenuAsync(int menuId);
-        Task<string> MenuEkleAsync(string menuAdi, int ustMenuId, int menuSirasi, string aciklama, int erisimAlaniId, bool aktifMi, DateTime eklemeTarihi, DateTime guncellemeTarihi, int kullaniciId);
+        Task<string> MenuEkleAsync(string menuAdi, int ustMenuId, int menuSirasi, string aciklama, int erisimAlaniId, int kullaniciId);
         Task<string> MenuGuncelleAsync(int menuId, string menuAdi, int ustMenuId, int menuSirasi, string aciklama, int erisimAlaniId, bool aktifMi, DateTime eklemeTarihi, DateTime guncellemeTarihi, int kullaniciId);
-        Task<string> MenuSilAsync(int menuId); Task<IEnumerable<Menular>> MenuListesiAsync();
+        Task<string> MenuSilAsync(int menuId);
+        Task<IEnumerable<Menular>> MenuListesiAsync();
         Task<IEnumerable<Menular>> MenuListesiAsync(bool aktifMi);
     }
 }

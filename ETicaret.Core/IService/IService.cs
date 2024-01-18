@@ -19,6 +19,8 @@ namespace ETicaret.Core.IService
         Task UpdateAsync(TEntity entity);
         Task RemoveAsync(TEntity entity);
         Task RemoveRangeAsync(IEnumerable<TEntity> entities);
+        Task<IEnumerable<TEntity>> GetAllQueryAsync(Expression<Func<TEntity, bool>> expression);
+        //Task<IEnumerable<TEntity>> Find(Expression<Func<TEntity, bool>> predicate);
     }
 }
 //*************************************NOTLARIM******************************

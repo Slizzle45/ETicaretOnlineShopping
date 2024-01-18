@@ -8,10 +8,9 @@ using System.Threading.Tasks;
 
 namespace ETicaret.Core.IService
 {
-    public interface IErisimAlanlariService : IService<ErisimAlanlari>
+    public interface IilService
     {
-        Task<List<ErisimAlanlari>> GetErisimAlanlariWithYetkiIdAsync(int yetkiId);
-        Task<List<ErisimAlanlariDTO>> GetErisimAlani();
-
+        Task<List<Iller>> IllerListele();
+        Task<List<Ilceler>> GetIllerWithIlceler(int ilId);
     }
 }
