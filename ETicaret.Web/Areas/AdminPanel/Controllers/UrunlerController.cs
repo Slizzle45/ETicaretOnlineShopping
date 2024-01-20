@@ -6,6 +6,7 @@ using ETicaret.Core.IService;
 using ETicaret.Service.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore;
 using System.Collections.Specialized;
 using System.ComponentModel;
 
@@ -17,12 +18,15 @@ namespace ETicaret.Web.Areas.AdminPanel.Controllers
         private readonly IKategoriService _kategoriService;
         private readonly IUrunlerService _service;
         private readonly IMapper _mapper;
+        private readonly IFotograflarService _fotograflarService;
 
-        public UrunlerController(IUrunlerService service, IMapper mapper, IKategoriService kategoriService)
+
+        public UrunlerController(IUrunlerService service, IMapper mapper, IKategoriService kategoriService, IFotograflarService fotograflarService)
         {
             _service = service;
             _mapper = mapper;
             _kategoriService = kategoriService;
+            _fotograflarService = fotograflarService;
         }
         public async Task<IActionResult> UrunlerIndex()
         {
@@ -46,16 +50,22 @@ namespace ETicaret.Web.Areas.AdminPanel.Controllers
             if (ModelState.IsValid)
             {
                 var sonuc = await _service.AddAsync(urunler);
+
+                string urunResimGuid = TempData["urunGuid"].ToString();
+                //FotoğrafAdı?
+                //fotografAciklamasi??,
+                //urunId
+
                 if (sonuc != null)
                 {
+
                     return RedirectToAction("UrunlerIndex");
                 }
             }
+
             var kategoriList = await _kategoriService.GetAllAsyncs();
             var kategoriDTO = _mapper.Map<List<KategoriDTO>>(kategoriList);
             ViewBag.kategoriler = kategoriDTO;
-
-
 
             return View();
         }
@@ -84,7 +94,7 @@ namespace ETicaret.Web.Areas.AdminPanel.Controllers
 
         [HttpPost]
         public async Task<IActionResult> UrunGuncelleIndex(Urunler urunler)
-        {           
+        {
 
             if (ModelState.IsValid)
             {
@@ -96,6 +106,7 @@ namespace ETicaret.Web.Areas.AdminPanel.Controllers
             TempData["hataMesaji"] = "<b>Güncelleme hata verdi, lütfen kontrol ediniz </b>";//Bu mesaj UrunGuncelleIndex Get'inde gösterilecek
 
             return RedirectToAction("UrunGuncelleIndex", urunler.Id);//Eğer hata verirse tekrar UrunGuncelleIndex (Get) methoduna yönlendirdim
+            //Fotoğraf ekleme
         }
 
         public IActionResult UrunSilIndex(int id)
@@ -115,6 +126,66 @@ namespace ETicaret.Web.Areas.AdminPanel.Controllers
             var kategoriList = await _kategoriService.GetAllAsyncs();
             var kategoriDTO = _mapper.Map<List<KategoriDTO>>(kategoriList);
             ViewBag.kategoriler = kategoriDTO;
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Upload(IFormFile file,int id)
+        {
+            var uploads = @"C:\UrunResimleri\";
+            if (file.Length > 0)
+            {
+                var createGuid = Guid.NewGuid().ToString();
+                string dosyaUzantisi = file.FileName.Split('.')[1];
+                string resimAdi = $"urunId={id}_{createGuid.Substring(0,7)}.{dosyaUzantisi}";//urunId1_1vcf-345-3453535-sfsf.png
+
+                var filePath = Path.Combine(uploads, resimAdi);
+                ViewData["dosyaYolu"] = filePath.ToString();
+
+                using (var fileStream = new FileStream(filePath, FileMode.Create))
+                {
+                    string kaydet = await _fotograflarService.FotografEkleAsync(resimAdi,file.FileName , 1, id, false, DateTime.Now, DateTime.Now);//DB ye keler
+
+                    await file.CopyToAsync(fileStream);//Localdeki dosyaya 1 kopyasını atar                    
+                }
+                // Return the file path in JSON format
+                return Json(new { success = true, filePath = filePath });
+            }
+            return Json(new { success = false });
+        }
+
+
+       
+
+        /// <summary>
+        /// Resim sayfası. Bir ürün için Resim ekleme ve güncelleme işlemi yapar
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public async Task<IActionResult> UrunResimleri(int id)
+        {
+            try
+            {
+                var getirUrun = await _service.GetByIdAsync(id);
+
+                var getirResimler = await _fotograflarService.GetAllQueryAsync(k => k.UrunId == id);
+
+                if (getirResimler.Count() > 0)
+                {
+#warning bu kısımda resimlerin listelenmesi sağlanacak
+                    //Resimleri olan ürün için resimleri View'e göndermeiz gereklidir?
+                    return View(getirUrun);
+                }
+
+
+                ViewBag.resimYok = "Resim yok";
+                return View(getirUrun);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+
         }
     }
 }
