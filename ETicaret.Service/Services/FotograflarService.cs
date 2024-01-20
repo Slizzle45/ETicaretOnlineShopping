@@ -28,7 +28,7 @@ namespace ETicaret.Service.Services
         {
             try
             {
-                Fotograflar fotograf = new();
+                Fotograflar fotograf = new Fotograflar();//Garbage Collector oluşur
                 fotograf.FotografYolu = fotografYolu;
                 fotograf.FotografAciklamasi = fotografAciklamasi;
                 fotograf.FotografSirasi = fotografSirasi;
@@ -39,11 +39,11 @@ namespace ETicaret.Service.Services
 
                 await AddAsync(fotograf);
 
-                return "Ekleme başarılı.";
+                return "RESİM EKLEME BAŞARILI";
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                return "Ekleme esnasında hata oluştu.";
+                return "Ekleme esnasında hata oluştu."+ex;
             }
         }
 
