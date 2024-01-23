@@ -229,7 +229,14 @@
             </form>
             @if(!isLoggedIn)
             {
-                <span style="font-size: larger; font-weight: bold;">Yorum yapmak için lütfen giriş yapın.</span>
+                <span style="font-size: larger; font-weight: bold;">
+                    Yorum yapmak için lütfen
+                    <a href="#" style="color: #2596be; text-decoration: underline;" data-bs-toggle="modal" data-bs-target="#modalLoginForm">
+                        giriş
+                    </a>
+                    yapın.
+                </span>
+
             }
         </div>
     </div>
