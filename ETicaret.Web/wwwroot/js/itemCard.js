@@ -19,7 +19,7 @@
 
     itemCard.forEach(function (item) {
         item.addEventListener('click', function () {
-            window.location.href = 'ItemDetails/ItemDetails';
+            window.location.href = '/Home/ItemDetails';
         });
 
         var cardFooter = item.querySelector('.card-footer');
