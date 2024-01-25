@@ -26,7 +26,7 @@ namespace ETicaret.Core.ETicaretDatabase
 
         public string YasadigiSehir { get; set; }
 
-        public int kullaniciId { get; set; }
+        public int Kullanici_Id { get; set; }
 
         public int PersonelKullaniciBilgileriId { get; set; }
 

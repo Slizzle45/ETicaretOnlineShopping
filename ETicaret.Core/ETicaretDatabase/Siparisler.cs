@@ -18,5 +18,6 @@ namespace ETicaret.Core.ETicaretDatabase
         public Kullanicilar Kullanicilar { get; set; }//Siparişte göre alan Personel
         public Musteriler Musteriler { get; set; }//++
         //public Sepetler Sepetler { get; set; }
+
     }
 }

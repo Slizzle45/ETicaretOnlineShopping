@@ -9,7 +9,8 @@ namespace ETicaret.Core.ETicaretDatabase
     public class Fotograflar : BaseEntity
     {
         public string FotografYolu { get; set; }
-        
+        //public string FotografAdi{ get; set; }
+
         public string FotografAciklamasi { get; set; }
 
         public byte? FotografSirasi { get; set; }
