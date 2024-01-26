@@ -9,7 +9,7 @@ namespace ETicaret.Core.DTO
 {
 	public class GetPersonellerWithKullanicilarDTO:BaseListDTO
 	{
-        public int KId { get; set; }
+       
         public string PersonelAdi { get; set; }
         public string PersonelSoyadi { get; set; }
         public string Cinsiyet { get; set; }
