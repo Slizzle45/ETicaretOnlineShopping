@@ -13,7 +13,7 @@ namespace ETicaret.Core.ETicaretDatabase
         public int ToplamUrunAdet { get; set; }
         public decimal ToplamFiyat { get; set; }
         public int MusteriId { get; set; }//++
-        public int SepetId { get; set; }
+        //public int SepetId { get; set; }
         public ICollection<SiparisDetay> SiparisDetay { get; set; }
         public Kullanicilar Kullanicilar { get; set; }//Siparişte göre alan Personel
         public Musteriler Musteriler { get; set; }//++
