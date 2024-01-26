@@ -1,4 +1,13 @@
-﻿<!DOCTYPE html>
+﻿@{
+    <script>
+        // modal açılması
+        document.getElementById('loginBtn').addEventListener('click', function () {
+            var myModal = new bootstrap.Modal(document.getElementById('modalLoginForm'));
+            myModal.show();
+        });
+    </script>
+}
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -99,13 +108,7 @@
                         <span class="badge bg-dark text-white ms-1 rounded-pill">0</span>
                     </button>
                     <!--partial-->
-                    <script>
-                        // modal açılması
-                        document.getElementById('loginBtn').addEventListener('click', function () {
-                            var myModal = new bootstrap.Modal(document.getElementById('modalLoginForm'));
-                            myModal.show();
-                        });
-                    </script>
+                    
                 </div>
             </div>
         </div>

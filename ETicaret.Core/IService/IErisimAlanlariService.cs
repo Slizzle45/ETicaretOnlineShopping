@@ -11,7 +11,8 @@ namespace ETicaret.Core.IService
     public interface IErisimAlanlariService : IService<ErisimAlanlari>
     {
         Task<List<ErisimAlanlari>> GetErisimAlanlariWithYetkiIdAsync(int yetkiId);
-        Task<List<ErisimAlanlariDTO>> GetErisimAlani();
+        Task<IEnumerable<ErisimAlanlari>> GetErisimAlani();
+        Task<string> ErisimAlaniSilAsync(int erisimAlanId);
 
     }
 }

@@ -7,9 +7,10 @@ using System.Threading.Tasks;
 
 namespace ETicaret.Core.IService
 {
-    internal interface ISiparislerDetayService : IService<SiparisDetay>
+    public interface ISiparislerDetayService : IService<SiparisDetay>
     {
-        //Bir ürün için belli tarihler arasında yapılan iparişleri
-        Task<List<SiparisDetay>> GetSiparisDetayWithDateAsync(Urunler urunID, DateTime baslangic, DateTime bitis);
+        Task<List<SiparisDetay>> GetSiparisDetayWithUrunAsync(int urunID);
+        Task<List<SiparisDetay>> GetSiparisDetayWithSiparisAsync(int siparisID);
+        Task<List<SiparisDetay>> GetSiparislerDetayWithPieceAsync(int siparisID);
     }
 }

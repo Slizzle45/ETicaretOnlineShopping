@@ -9,7 +9,8 @@ namespace ETicaret.Core.IRepositories
 {
     public interface ISiparislerDetayRepository : IGenericRepository<SiparisDetay>
     {
-        //Bir ürün için belli tarihler arasında yapılan iparişleri
-        Task<List<SiparisDetay>> GetSiparisDetayWithDateAsync(Urunler urunID ,DateTime baslangic, DateTime bitis);
+        Task<List<SiparisDetay>> GetSiparisDetayWithUrunAsync(int urunID);
+        Task<List<SiparisDetay>> GetSiparisDetayWithSiparisAsync(int siparisID);
+        Task<List<SiparisDetay>> GetSiparislerDetayWithPieceAsync(int siparisID);
     }
 }

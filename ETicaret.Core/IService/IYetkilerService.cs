@@ -12,5 +12,6 @@ namespace ETicaret.Core.IService
     {
         Task<List<Yetkiler>> GetYetkilerWithErisimAlanIDAsync(int erisimAlanId);
         Task<List<YetkilerDTO>> GetYetkiler();
+        Task<string> YetkiSilAsync(int yetkiId);
     }
 }

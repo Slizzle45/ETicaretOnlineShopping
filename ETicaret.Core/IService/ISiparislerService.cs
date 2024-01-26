@@ -1,4 +1,5 @@
-﻿using ETicaret.Core.ETicaretDatabase;
+﻿using ETicaret.Core.DTO;
+using ETicaret.Core.ETicaretDatabase;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,10 +8,14 @@ using System.Threading.Tasks;
 
 namespace ETicaret.Core.IService
 {
-    internal interface ISiparislerService : IService<Siparisler>
+    public interface ISiparislerService : IService<Siparisler>
     {
+        // Eklenme tarihine göre siparişleri listeler
         Task<List<Siparisler>> GetSiparislerMadeTodayAsync(DateTime siparisTarihi);
-        Task<List<Siparisler>> GetSiparislerWithKullanicilarAsync(Kullanicilar kullaniciID);
-        Task<List<Siparisler>> GetSiparislerWithMusterilerAsync(Musteriler musteriID);
+        // Siparişi gerçekleştiren Personele göre listeler
+        Task<List<Siparisler>> GetSiparislerWithKullanicilarAsync(Kullanicilar kullanici);
+        // Siparişi gerçekleştiren müşterilere göre listeler
+        Task<List<Siparisler>> GetSiparislerWithMusteriAsync(Musteriler musteri);
+        Task<List<GetSiparislerWithMusterilerDTO>> GetSiparislerWithMusterilerAsync();
     }
 }
