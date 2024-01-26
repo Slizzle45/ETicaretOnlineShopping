@@ -29,12 +29,11 @@ namespace ETicaret.Service.Services
             _mapper = mapper;
         }
 
-        public  async Task<List<ErisimAlanlariDTO>> GetErisimAlani()
+        public async Task<IEnumerable<ErisimAlanlari>> GetErisimAlani()
         {
 
-            var erisimList =await _repository.GetAll().ToListAsync();
-            var erisimAlanlari =  _mapper.Map<List<ErisimAlanlariDTO>>(erisimList);
-            return  erisimAlanlari;
+            var erisimList = await _repository.GetAllQueryAsync(k => k.AktifMi == true);
+            return erisimList;
 
         }
 
@@ -46,6 +45,21 @@ namespace ETicaret.Service.Services
                 .ToListAsync();
 
             return yetkiErisimler;
+        }
+
+        public async Task<string> ErisimAlaniSilAsync(int erisimAlanId)
+        {
+            var alanSil = await GetByIdAsync(erisimAlanId);
+            try
+            {
+                alanSil.AktifMi = false;
+                await _unitOfWork.CommitAsync();
+                return "Silme başarılı";
+            }
+            catch (Exception)
+            {
+                return "Silme esnasında hata oluştu";
+            }
         }
     }
 }

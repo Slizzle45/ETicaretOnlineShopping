@@ -40,9 +40,24 @@ namespace ETicaret.Service.Services
 
         public async Task<List<YetkilerDTO>> GetYetkiler()
         {
-            var yetkiList = _repository.GetAll();
+            var yetkiList = await _repository.GetAllQueryAsync(k => k.AktifMi == true);
             var yetkiler = _mapper.Map<List<YetkilerDTO>>(yetkiList);
             return yetkiler;
+        }
+
+        public async Task<string> YetkiSilAsync(int yetkiId)
+        {
+            var yetkiSil = await GetByIdAsync(yetkiId);
+            try
+            {
+                yetkiSil.AktifMi = false;
+                await _unitOfWork.CommitAsync();
+                return "Silme başarılı";
+            }
+            catch (Exception)
+            {
+                return "Silme esnasında hata oluştu";
+            }
         }
 
     }

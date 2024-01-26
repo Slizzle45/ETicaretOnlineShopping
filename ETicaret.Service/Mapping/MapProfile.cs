@@ -23,11 +23,12 @@ namespace ETicaret.Service.Mapping
             //CreateMap<Kategoriler,KategorilerDTO>().ReverseMap();
 
             CreateMap<Kullanicilar, KullanicilarDTO>().ReverseMap();
-            CreateMap<Kullanicilar, GetKullanicilarWithPersonellerDTO>().ReverseMap();
-            CreateMap<Kullanicilar, GetKullanicilarWithMusterilerDTO>().ReverseMap();
+            //CreateMap<Kullanicilar, GetKullanicilarWithPersonellerDTO>().ReverseMap();
+            //CreateMap<Kullanicilar, GetKullanicilarWithMusterilerDTO>().ReverseMap();
             CreateMap<Kullanicilar, GetKullanicilarWithYetkilerDTO>().ReverseMap();
-           
+
             CreateMap<Personeller, PersonellerDTO>().ReverseMap();
+            CreateMap<Personeller, KullanicilarDTO>().ReverseMap();
             CreateMap<Personeller, GetPersonellerWithKullanicilarDTO>().ReverseMap();
             CreateMap<Fotograflar, FotograflarDTO>().ReverseMap();
             CreateMap<Fotograflar, GetFotograflarWithUrunlerDTO>().ReverseMap();
@@ -35,6 +36,10 @@ namespace ETicaret.Service.Mapping
 
             //CreateMap<Urunler, GetUrunlerWithKategoriDTO>().ReverseMap();
             CreateMap<Siparisler, GetSiparislerWithMusterilerDTO>().ReverseMap();
+            CreateMap<Siparisler, SiparislerDTO>().ReverseMap();
+            CreateMap<Siparisler, SiparislerUpdateDTO>().ReverseMap();
+            CreateMap<SiparisDetay, SiparisDetayDTO>().ReverseMap();
+            CreateMap<SiparisDetay, SiparisDetayUpdateDTO>().ReverseMap();
 
             CreateMap<Yetkiler, YetkilerDTO>().ReverseMap();
             CreateMap<Yetkiler, YetkilerUpdateDTO>().ReverseMap();
