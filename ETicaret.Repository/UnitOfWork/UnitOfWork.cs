@@ -9,20 +9,20 @@ namespace ETicaret.Repository.UntiOfWork
 {
     public class UnitOfWork : IUnitOfWork
     {
-        protected readonly AppDbContext _eTicaretDB;//ETicaretCoreDB veritabanı adı AppDbContext olarak vermiştik
+        protected readonly AppDbContext _appDbContext;
 
         public UnitOfWork( AppDbContext context)
         {
-            _eTicaretDB = context;
+            _appDbContext = context;
         }
         public void Commit()
         {
-            _eTicaretDB.SaveChanges();
+            _appDbContext.SaveChanges();
         }
 
         public async Task CommitAsync()
         {
-            await _eTicaretDB.SaveChangesAsync();
+            await _appDbContext.SaveChangesAsync();
         }
     }
 }

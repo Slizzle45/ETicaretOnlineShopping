@@ -20,7 +20,8 @@ namespace ETicaret.Repository.Configurations
 
             builder.Property(k => k.EklenmeTarih).IsRequired(true);
 
-            builder.Property(k => k.FotografYolu).IsRequired(true);
+            //builder.Property(k => k.FotografYolu).IsRequired(true);
+            //builder.Property(k => k.FotografAdi).IsRequired(true);
 
             builder.Property(k => k.FotografAciklamasi).IsRequired(true);
 

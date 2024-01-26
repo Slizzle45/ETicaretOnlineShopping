@@ -33,7 +33,7 @@ namespace ETicaret.Repository.Repositories
 
         public async Task<Kullanicilar> GetKullanicilarWithYetkilerAsync(int kullanicilarId)
         {
-            return await _eTicaretDB.Kullanicilar.Where(k=>k.Id== kullanicilarId).FirstOrDefaultAsync();	
+            return await _eTicaretDB.Kullanicilar.Where(k=>k.Id== kullanicilarId).Include(k=>k.Yetkiler).FirstOrDefaultAsync();	
         }
 
         public async Task<string> KullaniciEkle(string Adi, string Soyadi, string Resim, string KullaniciEmail, string KullaniciSifre, bool PersonelMi, int YetkiId)
