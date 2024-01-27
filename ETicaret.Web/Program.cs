@@ -58,6 +58,12 @@ namespace ETicaret.Web
             builder.Services.AddScoped<IErisimAlanlariService, ErisimAlanlariService>();
             builder.Services.AddScoped<IUrunlerService, UrunlerService>();
             builder.Services.AddScoped<IKullanicilarService, KullanicilarService>();
+
+            builder.Services.AddScoped<ISiparislerRepository, SiparislerRespository>();
+            builder.Services.AddScoped<ISiparislerDetayRepository, SiparislerDetayRespository>();
+            builder.Services.AddScoped<ISiparislerService, SiparislerService>();
+            builder.Services.AddScoped<ISiparislerDetayService, SiparisDetayService>();
+
             builder.Services.AddScoped<IPersonellerService, PersonellerService>();
             builder.Services.AddScoped<IPersonellerService, PersonellerService>();
             builder.Services.AddScoped<IPersonellerRepository, PersonellerRepository>();
