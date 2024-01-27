@@ -54,6 +54,7 @@
                                     <th>AKTİF Mİ</th>
                                     <th>AÇIKLAMA</th>
                                     <th>ONAYLAYAN</th>
+                                    <th>FOTO</th>
                                     <th>GNCL</th>
                                     <th>SİL</th>
                                 </tr>
@@ -89,7 +90,11 @@
                                         </td>
                                         <td>@item.Aciklama</td>
                                         <td>@item.KullaniciAdiSoyadi</td>
+                                        <td>
+                                            <a href='~/AdminPanel/Urunler/UrunResimleri/@item.Id' class='btn btn-sm btn-primary' ><i class='fas fa-eye'></i></a>
 
+
+                                        </td>
                                         <td>
                                             <a href='~/AdminPanel/Urunler/UrunGuncelleIndex/@item.Id' class='btn btn-sm btn-warning' id=""><i class='fas fa-pencil-alt'></i></a>
 

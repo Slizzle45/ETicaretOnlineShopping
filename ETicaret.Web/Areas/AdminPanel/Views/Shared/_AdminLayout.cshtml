@@ -213,7 +213,7 @@
                         <!-- Add icons to the links using the .nav-icon class
                         with font-awesome or any other icon font library -->
 
-                         <li class="nav-item">
+                        <li class="nav-item">
                             <a href="~/AdminPanel/Urunler/UrunlerIndex" class="nav-link">
                                 <i class="nav-icon far fa-circle text-info"></i>
                                 <p>Ürünler</p>
@@ -222,7 +222,7 @@
                         @try
                         {
                             @* if (Context.Session.GetString("kullaniciYetki").ToString()==YetkilerEnum.Admin.GetHashCode().ToString()) *@
-                            if(true)
+                            if (true)
                             {
                                 <li class="nav-item">
                                     <a href="~/AdminPanel/Adresler/AdreslerIndex" class="nav-link">
@@ -245,72 +245,72 @@
                                     </a>
                                 </li>
 
-                        <li class="nav-item">
-                            <a href="~/AdminPanel/Kategoriler/KategorilerIndex" class="nav-link">
-                                <i class="nav-icon far fa-circle text-info"></i>
-                                <p>Kategoriler</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="~/AdminPanel/Urunler/UrunlerIndex" class="nav-link">
-                                <i class="nav-icon far fa-circle text-info"></i>
-                                <p>Ürünler</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="~/AdminPanel/Kullanicilar/KullanicilarIndex" class="nav-link">
-                                <i class="nav-icon far fa-circle text-info"></i>
-                                <p>Kullanıcılar</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="~/AdminPanel/Menuler/MenulerIndex" class="nav-link">
-                                <i class="nav-icon far fa-circle text-info"></i>
-                                <p>Menüler</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="~/AdminPanel/Musteriler/MusterilerIndex" class="nav-link">
-                                <i class="nav-icon far fa-circle text-info"></i>
-                                <p>Müşteriler</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="~/AdminPanel/AdminPersoneller/PersonellerIndex" class="nav-link">
-                                <i class="nav-icon far fa-circle text-info"></i>
-                                <p>Personeller</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="#" class="nav-link">
-                                <i class="nav-icon far fa-circle text-info"></i>
-                                <p>Siparişler</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="#" class="nav-link">
-                                <i class="nav-icon far fa-circle text-info"></i>
-                                <p>Sipariş Detayları</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="#" class="nav-link">
-                                <i class="nav-icon far fa-circle text-info"></i>
-                                <p>Yetki Erişimleri</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="~/AdminPanel/AdminYetkiler/AdminYetkilerIndex" class="nav-link">
-                                <i class="nav-icon far fa-circle text-info"></i>
-                                <p>Yetkiler</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="~/AdminPanel/Yorumlar/YorumlarIndex" class="nav-link">
-                                <i class="nav-icon far fa-circle text-info"></i>
-                                <p>Yorumlar</p>
-                            </a>
-                        </li>
+                                <li class="nav-item">
+                                    <a href="~/AdminPanel/Kategoriler/KategorilerIndex" class="nav-link">
+                                        <i class="nav-icon far fa-circle text-info"></i>
+                                        <p>Kategoriler</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="~/AdminPanel/Urunler/UrunlerIndex" class="nav-link">
+                                        <i class="nav-icon far fa-circle text-info"></i>
+                                        <p>Ürünler</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="~/AdminPanel/Kullanicilar/KullanicilarIndex" class="nav-link">
+                                        <i class="nav-icon far fa-circle text-info"></i>
+                                        <p>Kullanıcılar</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="~/AdminPanel/Menuler/MenulerIndex" class="nav-link">
+                                        <i class="nav-icon far fa-circle text-info"></i>
+                                        <p>Menüler</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="~/AdminPanel/Musteriler/MusterilerIndex" class="nav-link">
+                                        <i class="nav-icon far fa-circle text-info"></i>
+                                        <p>Müşteriler</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="~/AdminPanel/AdminPersoneller/PersonellerIndex" class="nav-link">
+                                        <i class="nav-icon far fa-circle text-info"></i>
+                                        <p>Personeller</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="~/AdminPanel/Siparisler/SiparislerIndex" class="nav-link">
+                                        <i class="nav-icon far fa-circle text-info"></i>
+                                        <p>Siparişler</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="#" class="nav-link">
+                                        <i class="nav-icon far fa-circle text-info"></i>
+                                        <p>Sipariş Detayları</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="#" class="nav-link">
+                                        <i class="nav-icon far fa-circle text-info"></i>
+                                        <p>Yetki Erişimleri</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="~/AdminPanel/AdminYetkiler/AdminYetkilerIndex" class="nav-link">
+                                        <i class="nav-icon far fa-circle text-info"></i>
+                                        <p>Yetkiler</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="~/AdminPanel/Yorumlar/YorumlarIndex" class="nav-link">
+                                        <i class="nav-icon far fa-circle text-info"></i>
+                                        <p>Yorumlar</p>
+                                    </a>
+                                </li>
 
                             }
                         }
@@ -319,9 +319,9 @@
 
                             @Html.ActionLink("Page404Index", "SayfaBulunamadi", "")
                         }
-                        
 
-                       
+
+
                     </ul>
                 </nav>
                 <!-- /.sidebar-menu -->

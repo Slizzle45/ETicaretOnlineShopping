@@ -103,7 +103,7 @@
 									<option selected>Seçiniz...</option>
 									@foreach (var item in ViewBag.kullanicilar)
 									{
-										<option value="@item.Id">@item.KullaniciAdSoyad</option>
+										<option value="@item.Id">@item.Adi @item.Soyadi</option>
 									}
 								</select>
 								<span asp-validation-for="KullaniciId" class="text-danger"></span>

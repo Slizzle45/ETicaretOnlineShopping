@@ -30,8 +30,8 @@ namespace ETicaret.Web.Areas.AdminPanel.Controllers
 		public async Task<IActionResult> PersonelKaydetIndex()
 		{
 			var kullaniciList = await _kullaniciService.GetAllAsyncs();
-			var kullaniciDTO=_mapper.Map<List<KullanicilarDTO>>(kullaniciList);
-			ViewBag.kullanicilar=kullaniciDTO;
+			var kullaniciDTO = _mapper.Map<List<KullanicilarDTO>>(kullaniciList);
+			ViewBag.kullanicilar = kullaniciDTO;
 			return View();
 		}
 
@@ -47,13 +47,27 @@ namespace ETicaret.Web.Areas.AdminPanel.Controllers
 				}
 			}
 			var kullaniciList = await _personelService.GetAllAsyncs();
-			var kullaniciDTO = _mapper.Map<List<KullanicilarDTO>>(kullaniciList);
+			var kullaniciDTO = _mapper.Map<List<KullanicilarDTO>>(kullaniciList.ToList());
 			ViewBag.kullanicilar = kullaniciDTO;
 
 			return View();
 
 		}
+
 		[HttpGet]
+		public async Task<IActionResult> PersonelGuncelleIndex(int id)
+		{
+			var getirPersonel = await _personelService.GetPersonellerWithKullanicilarAsync(id);
+			var kullaniciList=await _kullaniciService.GetAllAsyncs();
+
+			var kullanicilar = kullaniciList.ToList();
+			var personel = getirPersonel;
+
+			var model = new Tuple<List<Kullanicilar>,GetPersonellerWithKullanicilarDTO>(kullanicilar, personel);
+			return View(model);
+		}
+
+		[HttpPost]
 		public async Task<IActionResult> PersonelGuncelleIndex(Personeller personel)
 		{
 			if (ModelState.IsValid)

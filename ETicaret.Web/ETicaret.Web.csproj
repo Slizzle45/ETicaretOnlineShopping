@@ -66,9 +66,11 @@
     <None Include="Areas\AdminPanel\Views\SayfaBulunamadi\Page404Index.cshtml" />
     <None Include="Areas\AdminPanel\Views\Shared\AdminLayout.cshtml" />
     <None Include="Areas\AdminPanel\Views\Shared\_AdminLayout.cshtml" />
+    <None Include="Areas\AdminPanel\Views\Siparisler\SiparislerIndex.cshtml" />
     <None Include="Areas\AdminPanel\Views\Urunler\UrunGuncelleIndex.cshtml" />
     <None Include="Areas\AdminPanel\Views\Urunler\UrunKaydetIndex.cshtml" />
     <None Include="Areas\AdminPanel\Views\Urunler\UrunlerIndex.cshtml" />
+    <None Include="Areas\AdminPanel\Views\Urunler\UrunResimleri.cshtml" />
     <None Include="Areas\AdminPanel\Views\Urunler\UrunSilIndex.cshtml" />
     <None Include="Areas\AdminPanel\Views\Yorumlar\YorumEkleIndex.cshtml" />
     <None Include="Areas\AdminPanel\Views\Yorumlar\YorumGuncelleIndex.cshtml" />

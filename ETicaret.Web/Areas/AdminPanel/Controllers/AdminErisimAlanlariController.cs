@@ -5,6 +5,7 @@ using ETicaret.Core.IRepositories;
 using ETicaret.Core.IService;
 using ETicaret.Service.Services;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace ETicaret.Web.Areas.AdminPanel.Controllers
 {
@@ -23,7 +24,7 @@ namespace ETicaret.Web.Areas.AdminPanel.Controllers
 
         public async Task<IActionResult> AdminErisimAlanlariIndex()
         {
-            var erisimAlanlari = await _erisimAlanlariService.GetAllAsyncs();
+            var erisimAlanlari = await _erisimAlanlariService.GetErisimAlani();
             return View(erisimAlanlari);
         }
 
@@ -37,6 +38,16 @@ namespace ETicaret.Web.Areas.AdminPanel.Controllers
         [HttpPost]
         public async Task<IActionResult> AdminErisimAlanlariEkleIndex(ErisimAlanlari erisimAlanlari)
         {
+            var erisimVarMi = await _erisimAlanlariService.GetAllQuery(k => k.ControllerAdi == erisimAlanlari.ControllerAdi && k.ViewAdi == erisimAlanlari.ViewAdi).FirstOrDefaultAsync();
+            if (erisimVarMi != null)
+            {
+                erisimVarMi.AktifMi = true;
+                erisimVarMi.Aciklama = erisimAlanlari.Aciklama;
+                erisimVarMi.EklenmeTarih = DateTime.Now;
+                await _erisimAlanlariService.UpdateAsync(erisimVarMi);
+                return RedirectToAction("AdminErisimAlanlariIndex");
+            }
+
             erisimAlanlari.AktifMi = true;
             erisimAlanlari.EklenmeTarih = DateTime.Now;
             var sonuc = await _erisimAlanlariService.AddAsync(erisimAlanlari);
@@ -78,7 +89,7 @@ namespace ETicaret.Web.Areas.AdminPanel.Controllers
             return View(erisimAlani);
         }
         [HttpPost, ActionName("AdminErisimAlanlariSilIndex")]
-        public async Task<IActionResult> ErisimAlaniDelete(int Id, bool aktifMi)
+        public async Task<IActionResult> ErisimAlaniDelete(int Id)
         {
             var erisimAlani = await _erisimAlanlariService.GetByIdAsync(Id);
             if (ModelState.IsValid)
@@ -88,7 +99,7 @@ namespace ETicaret.Web.Areas.AdminPanel.Controllers
                 {
                     await _yetkiErisimService.RemoveRangeAsync(yetkiErisim);
                 }
-                await _erisimAlanlariService.RemoveAsync(erisimAlani);
+                await _erisimAlanlariService.ErisimAlaniSilAsync(Id);
                 return RedirectToAction("AdminErisimAlanlariIndex");
 
             }

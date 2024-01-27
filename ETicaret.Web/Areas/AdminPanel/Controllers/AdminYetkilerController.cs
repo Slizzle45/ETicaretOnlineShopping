@@ -5,6 +5,7 @@ using ETicaret.Core.IService;
 using ETicaret.Service.Services;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System.Text.Json;
 
 namespace ETicaret.Web.Areas.AdminPanel.Controllers
@@ -48,8 +49,24 @@ namespace ETicaret.Web.Areas.AdminPanel.Controllers
             var erisimAlanlari = await _erisimAlanlariService.GetErisimAlani();
             var yetkiErisim = await _yetkiErisimService.GetAllAsyncs();
             YetkiErisim yeniYetkiErisim = new YetkiErisim();
+
             if (ModelState.IsValid)
             {
+                var yetkiVarMi = await _yetkilerService.GetAllQuery(k => k.YetkiAdi == yetkileritem.YetkiAdi).FirstOrDefaultAsync();
+                if (yetkiVarMi != null)
+                {
+                    yetkiVarMi.AktifMi = true;
+                    await _yetkilerService.UpdateAsync(yetkiVarMi);
+                    foreach (var item in selectedSayfalar)
+                    {
+                        yeniYetkiErisim.YetkiId = yetkiVarMi.Id;
+                        yeniYetkiErisim.ErisimAlaniId = item;
+                        yeniYetkiErisim.Aciklama = yetkiVarMi.YetkiAdi;
+                        var sonuc2 = await _yetkiErisimService.AddAsync(yeniYetkiErisim);
+                    }
+                    return RedirectToAction("AdminYetkilerIndex");
+                }
+                yetkileritem.AktifMi = true;
                 var sonuc = await _yetkilerService.AddAsync(yetkileritem);
                 if (sonuc != null)
                 {
@@ -89,6 +106,8 @@ namespace ETicaret.Web.Areas.AdminPanel.Controllers
             //TempData["yetileri"]
             if (ModelState.IsValid)
             {
+                yetkiler.AktifMi = true;
+                yetkiler.GuncellenmeTarih = DateTime.Now;
                 await _yetkilerService.UpdateAsync(_mapper.Map<Yetkiler>(yetkiler));
 
                 var karsilastirmaSayfalari = await _yetkiErisimService.GetAllQueryAsync(k => k.YetkiId == yetkiler.Id);
@@ -136,7 +155,7 @@ namespace ETicaret.Web.Areas.AdminPanel.Controllers
             {
                 await _yetkiErisimService.RemoveRangeAsync(_mapper.Map<List<YetkiErisim>>(yetkiErisim));
 
-                await _yetkilerService.RemoveAsync(_mapper.Map<Yetkiler>(yetki));
+                await _yetkilerService.YetkiSilAsync(Id);
 
                 TempData["mesaj"] = "<b>Silindi</b>";
                 return RedirectToAction("AdminYetkilerIndex");

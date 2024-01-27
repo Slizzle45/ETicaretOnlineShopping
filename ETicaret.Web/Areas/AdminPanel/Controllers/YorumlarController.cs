@@ -42,6 +42,8 @@ namespace ETicaret.Web.Areas.AdminPanel.Controllers
         {
             if (ModelState.IsValid)
             {
+                yorumlar.EklenmeTarih = DateTime.Now;
+
                 var sonuc = await _service.AddAsync(yorumlar);
                 if (sonuc != null)
                 {
