@@ -24,7 +24,6 @@ namespace ETicaret.Repository.Configurations
             builder.Property(p => p.PersonelHakkinda).HasMaxLength(200).IsRequired();
             builder.Property(p => p.YasadigiSehir).IsRequired();
             //builder.HasOne(p => p.Kullanicilar).WithOne(p => p.Personeller).HasForeignKey<Kullanicilar>(p => p.PersonelId);
-           // builder.HasOne(p => p.Kullanicilar).WithMany(p => p.Personeller).HasForeignKey(p => p.KullaniciId);
            // builder.HasOne(p => p.Siparisler).WithMany(p => p.Personeller).HasForeignKey(p => p.SiparisId);
             //builder.HasOne(p => p.Musteriler).WithMany(p => p.Personeller).HasForeignKey(p => p.MusteriId);
            

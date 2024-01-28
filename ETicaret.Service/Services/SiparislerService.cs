@@ -46,10 +46,5 @@ namespace ETicaret.Service.Services
             var siparisVeMusteriDTO = _mapper.Map<List<GetSiparislerWithMusterilerDTO>>(siparisVeMusteriList);
             return siparisVeMusteriDTO;
         }
-
-        public Task<List<Siparisler>> GetSiparislerWithMusterilerAsync(Musteriler musteriID)
-        {
-            throw new NotImplementedException();
-        }
     }
 }

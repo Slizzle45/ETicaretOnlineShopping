@@ -15,5 +15,6 @@ namespace ETicaret.Core.IService
         Task<GetSepetlerWithKullanicilarDTO> GetSepetlerWithKullanicilarAsync(int sepetlerId);
 
         Task<Sepetler> GetSepetlerWithKullanicilarAsync(Sepetler sepet);
+        Task<Sepetler> SepettekiUrunSayisiDegistir(int urunId, int kullaniciId);
     }
 }

@@ -17,10 +17,12 @@ namespace ETicaret.Service.Services
     {
         readonly ISepetlerRepository _sepetRepo;
         readonly IMapper _mapper;
+        IUnitOfWork _unitOfWork;
         public SepetlerService(IGenericRepository<Sepetler> repository, IUnitOfWork unitOfWork,ISepetlerRepository sepetRepo,IMapper mapper) : base(repository, unitOfWork)
         {
             _sepetRepo = sepetRepo;
             _mapper=mapper;
+            _unitOfWork=unitOfWork;
         }
 
         public async Task<List<GetSepetlerWithKullanicilarDTO>> GetSepetlerWithKullanicilarAsync()
@@ -45,6 +47,13 @@ namespace ETicaret.Service.Services
         public Task<GetSepetlerWithKullanicilarDTO> GetSepetlerKullanicilar()
         {
             throw new NotImplementedException();
+        }
+
+        public async Task<Sepetler> SepettekiUrunSayisiDegistir(int urunId, int kullaniciId)
+        {
+            var guncelle =await  _sepetRepo.SepettekiUrunSayisiDegistir(urunId, kullaniciId); 
+            _unitOfWork.Commit();
+            return guncelle;
         }
     }
 

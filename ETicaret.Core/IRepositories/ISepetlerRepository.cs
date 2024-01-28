@@ -11,5 +11,6 @@ namespace ETicaret.Core.IRepositories
     {
         Task<List<Sepetler>> GetSepetlerWithKullanicilarAsync();
         Task<Sepetler> GetSepetlerWithKullanicilarAsync(int sepetlerId);
+        Task<Sepetler> SepettekiUrunSayisiDegistir(int urunId, int kullaniciId);
     }
 }

@@ -49,5 +49,6 @@ namespace ETicaret.Service.Services
             throw new NotImplementedException();
         }
 
+       
     }
 }

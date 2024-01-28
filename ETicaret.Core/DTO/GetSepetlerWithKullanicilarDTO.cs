@@ -17,7 +17,6 @@ namespace ETicaret.Core.DTO
         public string indirimKodu { get; set; }
         public string SiparisDurumu { get; set; }
         public string MusteriNot { get; set; }
-        public int kullaniciId { get; set; }
         public string KullaniciAdiSoyadi { get; set; }
     }
 }

@@ -101,5 +101,11 @@ namespace ETicaret.Repository.Repositories
         {
             return _dbSet.Where(predicate).ToList();
         }
-    }
+
+		//public async Task<TEntity> GetOneEntity(Expression<Func<TEntity, bool>> expression)
+		//{
+		//	return await _dbSet.Where(expression).FirstOrDefaultAsync();
+		//}
+
+	}
 }

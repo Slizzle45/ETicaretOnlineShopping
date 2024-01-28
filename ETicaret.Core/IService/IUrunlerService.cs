@@ -15,5 +15,7 @@ namespace ETicaret.Core.IService
         Task<GetUrunlerWithKategoriDTO> GetUrunlerWithKategoriAsync(int urunlerId);
 
         Task<Urunler> GetUrunlerWithKategoriAsync(Urunler kategori);
+
+       
     }
 }
