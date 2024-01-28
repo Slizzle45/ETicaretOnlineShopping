@@ -1,12 +1,15 @@
 ﻿
+using ETicaret.Core.ETicaretDatabase;
 using ETicaret.Core.IRepositories;
 using ETicaret.Core.IService;
 using ETicaret.Core.IUnitOfWork;
 using ETicaret.Repository;
 using ETicaret.Repository.Repositories;
 using ETicaret.Repository.UntiOfWork;
+using ETicaret.Service.Mapping;
 using ETicaret.Service.Services;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection.Extensions;
 using System.Reflection;
 
 namespace ETicaret.API
@@ -25,6 +28,30 @@ namespace ETicaret.API
             builder.Services.AddScoped(typeof(IService<>), typeof(Service<>));
             builder.Services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
             builder.Services.AddSwaggerDocument();//Swager için eklendi
+            builder.Services.AddAutoMapper(typeof(MapProfile));
+
+            builder.Services.AddScoped<IYetkilerService, YetkilerService>();
+            builder.Services.AddScoped<IErisimAlanlariService, ErisimAlanlariService>();
+            builder.Services.AddScoped<IKullanicilarService, KullanicilarService>();
+            builder.Services.AddScoped<IService<ErisimAlanlari>, ErisimAlanlariService>();
+            builder.Services.AddScoped<IService<Yetkiler>, YetkilerService>();
+            builder.Services.AddScoped<IUrunlerRepository, UrunlerRepository>();
+            builder.Services.AddScoped<IUrunlerService, UrunlerService>();
+            builder.Services.AddScoped<IKullanicilarRepository, KullanicilarRepository>();
+
+            builder.Services.AddScoped<ISiparislerService, SiparislerService>();
+            builder.Services.AddScoped<ISiparislerRepository, SiparislerRespository>();
+            builder.Services.AddScoped<ISiparislerDetayService, SiparisDetayService>();
+            builder.Services.AddScoped<ISiparislerDetayRepository, SiparislerDetayRespository>();
+
+            //
+            builder.Services.AddScoped<IFotograflarRepository, FotograflarRepository>();
+            builder.Services.AddScoped<IFotograflarService, FotograflarService>();
+            builder.Services.AddScoped<IService<Fotograflar>, FotograflarService>();
+            builder.Services.AddScoped<IYorumlarRepository, YorumlarRepository>();
+            builder.Services.AddScoped<IYorumlarService, YorumlarService>();
+
+            //
 
             #region DB işlemleri
 
