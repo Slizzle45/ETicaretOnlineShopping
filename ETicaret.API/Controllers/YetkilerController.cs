@@ -3,12 +3,13 @@ using ETicaret.Core.DTO;
 using ETicaret.Core.ETicaretDatabase;
 using ETicaret.Core.IService;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace ETicaret.API.Controllers
 {
     [Route("api/[Controller]")]
     [ApiController]
-    public class YetkilerController : Controller
+    public class YetkilerController : BaseController
     {
         private readonly IService<Yetkiler> _service;
         private readonly IService<YetkiErisim> _yetkiErisimService;
@@ -24,32 +25,41 @@ namespace ETicaret.API.Controllers
             _yetkiService = yetkilerService;
             _erisimAlanService = erisimAlanSevice;
         }
-        [HttpGet]
+        [HttpGet("Yetkiler")]
         public async Task<IActionResult> YetkilerIndex()
         {
-            var yetki = await _service.GetAllAsyncs();
+            var yetki = await _yetkiService.GetYetkiler();
             var yetkiDto = _mapper.Map<List<YetkilerDTO>>(yetki);
-            return Ok(yetkiDto);
+            return ResultAPI(yetki);
         }
+        //[HttpGet]
+        //public async Task<IActionResult> YetkilerIndex()
+        //{
+        //    var yetki = await _service.GetAllAsyncs();
+        //    var yetkiDto = _mapper.Map<List<YetkilerDTO>>(yetki);
+        //    return Ok(yetkiDto);
+        //}
         [HttpPost]
         public async Task<IActionResult> YetkiSave(YetkilerDTO yetkilerDTO)
         {
             var mapYetki = _mapper.Map<Yetkiler>(yetkilerDTO);
+            mapYetki.AktifMi = true;
             var yetkiSave = await _service.AddAsync(mapYetki);
             var mapAdd = _mapper.Map<YetkilerDTO>(yetkiSave);
-            return Ok(mapAdd);
+            return ResultAPI(mapAdd);
         }
         //[HttpPut("/{yetkiId:int}")] böyle de yapılabilir.
         [HttpPut]
-        public async Task<IActionResult> YetkiUpdate(YetkilerUpdateDTO yetkilerUpdateDTO)
+        public async Task<IActionResult> YetkiUpdate(YetkilerUpdateDTO yetkiler)
         {
-            var getYetki = await _service.GetByIdAsync(yetkilerUpdateDTO.Id);
+            var getYetki = await _service.GetByIdAsync(yetkiler.Id);
             if (getYetki != null)
             {
-                getYetki.YetkiAdi = yetkilerUpdateDTO.YetkiAdi;//BUnu sor mantıksız geldi...
-                await _service.UpdateAsync(_mapper.Map<Yetkiler>(getYetki));
-                return Ok();
+                yetkiler.AktifMi = true;
+                _mapper.Map(yetkiler, getYetki);
+                await _service.UpdateAsync(getYetki);
 
+                return ResultAPI(yetkiler);
             }
             else
             {
@@ -61,7 +71,7 @@ namespace ETicaret.API.Controllers
         public async Task<IActionResult> YetkiDelete(int id)
         {
             var getYetki = await _service.GetByIdAsync(id);
-            var getYetkiErisim = _yetkiErisimService.GetAllQuery(a => a.YetkiId == id);
+            var getYetkiErisim = _yetkiErisimService.GetAllQuery(a => a.YetkiId == id).ToList();
 
 
             if (getYetki != null || getYetkiErisim != null)
@@ -70,11 +80,12 @@ namespace ETicaret.API.Controllers
                 {
                     if (item != null)
                     {
-                        await _yetkiErisimService.RemoveAsync(_mapper.Map<YetkiErisim>(item));
+                        var nesne = _yetkiErisimService.GetAllQuery(k => k.YetkiId == item.YetkiId && k.ErisimAlaniId == item.ErisimAlaniId).FirstOrDefault();
+                        await _yetkiErisimService.RemoveAsync(nesne);
                     }
                 }
-                await _service.RemoveAsync(_mapper.Map<Yetkiler>(getYetki));
-                return Ok();
+                await _yetkiService.YetkiSilAsync(id);
+                return ResultAPI(getYetki);
             }
             else
             {
@@ -83,20 +94,15 @@ namespace ETicaret.API.Controllers
 
         }
 
-        [HttpGet("YetkilerWithErisimAlaniId/{id:int}")]
-        public async Task<IActionResult> YetkilerWithErisimAlaniId(int id)
+        [HttpGet("YetkiBulWithId/{id:int}")]
+        public async Task<IActionResult> YetkiBul(int id)
         {
-            var yetkiler = await _yetkiService.GetYetkilerWithErisimAlanIDAsync(id);
-            var erisimAlani = await _erisimAlanService.GetByIdAsync(id);
-            if (yetkiler != null)
+            var yetkiVarMi = await _yetkiService.GetAllQuery(k => k.Id == id).FirstOrDefaultAsync();
+            if (yetkiVarMi != null)
             {
-                var yetkiDto = _mapper.Map<List<GetYetkilerWithErisimAlaniDTO>>(yetkiler);
-                foreach (var item in yetkiDto)
-                {
-                    item.ControllerAdi = erisimAlani.ControllerAdi;
-                    item.ViewAdi = erisimAlani.ViewAdi;
-                }
-                return Ok(yetkiDto);
+                //var yetkiDto = _mapper.Map<YetkilerDTO>(yetkiVarMi);
+
+                return ResultAPI(yetkiVarMi);
 
             }
             else
@@ -105,7 +111,24 @@ namespace ETicaret.API.Controllers
 
             }
         }
-        
+        [HttpGet("YetkiBulWithName")]
+        public async Task<IActionResult> YetkiBulWithName(string name)
+        {
+            var yetkiVarMi = await _yetkiService.GetAllQuery(k => k.YetkiAdi == name).FirstOrDefaultAsync();
+            if (yetkiVarMi != null)
+            {
+                var yetkiDto = _mapper.Map<YetkilerDTO>(yetkiVarMi);
+
+                return ResultAPI(yetkiDto);
+
+            }
+            else
+            {
+                return NoContent();
+
+            }
+        }
+
         [HttpGet("YetkilerGetById/{id:int}")]
         public async Task<IActionResult> YetkilerGetById(int id)
         {
@@ -113,7 +136,7 @@ namespace ETicaret.API.Controllers
             if (yetki != null)
             {
                 var yetkiDto = _mapper.Map<YetkilerDTO>(yetki);
-                return Ok(yetkiDto);
+                return ResultAPI(yetkiDto);
 
             }
             else

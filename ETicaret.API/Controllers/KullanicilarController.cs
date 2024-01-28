@@ -9,23 +9,39 @@ namespace ETicaret.API.Controllers
 {
 	[ApiController]
 	[Route("api/[Controller]")]
-	public class KullanicilarController : Controller
+	public class KullanicilarController : BaseController
 	{
 		private readonly IService<Kullanicilar> _service;
 		private readonly IMapper _mapper;
+		private readonly IKullanicilarService _kullanicilarService;
 
-		public KullanicilarController(IService<Kullanicilar> service,IMapper mapper)
+		public KullanicilarController(IService<Kullanicilar> service,IMapper mapper,IKullanicilarService kullanicilarService)
 		{
 			_service = service;
 			_mapper = mapper;
+			_kullanicilarService = kullanicilarService;
 		}
+		[HttpGet("Action")]//WEB-API İÇİN OLUŞTURULDU
+		public async Task<IActionResult> GetKullanicilarWithYetkiler()
+		{
+			return ResultAPI(await _kullanicilarService.GetKullanicilarWithYetkilerAsync());
+		}
+
+
 		[HttpGet]
 		public async Task<IActionResult> KullaniciIndex()
 		{
-			var kullanici =await _service.GetAllAsyncs();
-			var kullaniciDTO=_mapper.Map<List<KullanicilarDTO>>(kullanici);
-			return Ok(kullanici);
+			var kullanicilar = await _service.GetAllAsyncs();
+			var kullaniciDTO=_mapper.Map<List<KullanicilarDTO>>(kullanicilar);
+			return ResultAPI(kullaniciDTO);
 		}
+		//[HttpGet]
+		//public async Task<IActionResult> KullaniciIndex()
+		//{
+		//	var kullanici =await _service.GetAllAsyncs();
+		//	var kullaniciDTO=_mapper.Map<List<KullanicilarDTO>>(kullanici);
+		//	return Ok(kullanici);
+		//}
 
 	    
 		[HttpPost]
@@ -41,19 +57,19 @@ namespace ETicaret.API.Controllers
 		/// </summary>
 		/// <param name="kullanicilarDto"></param>
 		/// <returns></returns>
-		[HttpPut("id")]
-		public async Task<IActionResult> KullaniciUpdate(int id,KullanicilarUpdateDTO kullaniciupdateDto)
+		[HttpPut("KullanicilarUpdate")]
+		public async Task<IActionResult> KullanicilarUpdate(KullanicilarUpdateDTO kullaniciupdateDto)
 		{
-			var getKullanici =await _service.GetByIdAsync(id);
-			if (getKullanici==null)
+			var getKullanici =await _service.GetByIdAsync(kullaniciupdateDto.Id);
+			if (getKullanici!=null)
 			{
-				return NotFound();
+				await _service.UpdateAsync(_mapper.Map<Kullanicilar>(kullaniciupdateDto));
+				return Ok();
 			}
 			//await _service.UpdateAsync(_mapper.Map<Kullanicilar>(kullaniciupdateDto));
 			else
 			{
-				_mapper.Map(kullaniciupdateDto, getKullanici);
-				return Ok(_mapper.Map<KullanicilarDTO>(getKullanici));
+				return NoContent();
 				
 			}
 			
@@ -77,6 +93,23 @@ namespace ETicaret.API.Controllers
 				await _service.RemoveAsync(getKullanici);
 				return NoContent();
 			}
+		}
+		//Id ye göre kullanıcıyı bana getirir
+		[HttpGet("KullaniciGetById")]
+		public async Task<IActionResult> KullaniciGetById(int id)
+		{
+			var getKullanici=await _service.GetByIdAsync(id);
+			return Ok(getKullanici);
+		}
+
+
+		//Bu metod kullanıcılar tablomdaki bütün verileri bana getirir
+		[HttpGet("GetKullanicilarWithYetkilerDTO")]
+		public async Task<IActionResult> GetKullanicilarWithYetkilerDTO()
+		{
+			var kullanici = await _service.GetAllAsyncs();
+			var kullaniciDTO=_mapper.Map<List<GetKullanicilarWithYetkilerDTO>>(kullanici);
+			return Ok(kullaniciDTO);
 		}
 	}
 }

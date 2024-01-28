@@ -13,11 +13,20 @@ namespace ETicaret.API.Controllers
     {
         private readonly IService<Yorumlar> _service;
         private readonly IMapper _mapper;
+        readonly IYorumlarService _yorumlarService;
 
-        public YorumlarController(IService<Yorumlar> service,IMapper mapper)
+        public YorumlarController(IService<Yorumlar> service,IMapper mapper, IYorumlarService yorumlarService)
         {
             _service = service;
             _mapper = mapper;
+            _yorumlarService = yorumlarService;
+        }
+
+        [HttpGet("[action]")]
+        public async Task<IActionResult> GetYorumlarWithKullanicilar()
+        {
+
+            return ResultAPI(await _yorumlarService.GetYorumlarWithKullanicilarAsync());
         }
 
         [HttpGet]
@@ -25,7 +34,7 @@ namespace ETicaret.API.Controllers
         {
             var yorumlar = await _service.GetAllAsyncs();
             var yorumlarDTO = _mapper.Map<List<YorumlarDTO>>(yorumlar);
-            return Ok(yorumlarDTO);
+            return ResultAPI(yorumlarDTO);
         }
 
         [HttpPost]
@@ -36,14 +45,14 @@ namespace ETicaret.API.Controllers
             return Ok(mapAdd);
         }
 
-        [HttpPut]
+        [HttpPut("YorumlarUpdate")]
         public async Task<IActionResult> YorumlarUpdate(YorumlarUpdateDTO yorumUpdateDTO)
         {
-            var getYorum = _service.GetByIdAsync(yorumUpdateDTO.Id);
+            var getYorum = await _service.GetByIdAsync(yorumUpdateDTO.Id);
 
             if (getYorum != null)
             {
-                await _service.UpdateAsync(_mapper.Map<Yorumlar>(yorumUpdateDTO));
+                await _service.UpdateAsync(_mapper.Map(yorumUpdateDTO, getYorum));
             }
             else
             {
@@ -51,6 +60,29 @@ namespace ETicaret.API.Controllers
             }
 
             return ResultAPI(yorumUpdateDTO);
+        }
+
+        [HttpDelete]
+        public async Task<IActionResult> YorumRemove(int id)
+        {
+            var yorumRemove = await _service.GetByIdAsync(id);
+
+            if (yorumRemove != null)
+            {
+                await _service.RemoveAsync(yorumRemove);
+                return Ok();
+            }
+            else
+            {
+                return NoContent();
+            }
+        }
+
+        [HttpGet("GetYorumlarWithKullanicilar/{id}")]
+        public async Task<IActionResult> YorumGetById(int id)
+        {
+            var getYorum = await _service.GetByIdAsync(id);
+            return Ok(getYorum);
         }
     
     }

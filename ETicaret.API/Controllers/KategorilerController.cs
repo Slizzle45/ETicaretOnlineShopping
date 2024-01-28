@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using ETicaret.Core.DTO;
 using ETicaret.Core.ETicaretDatabase;
 using ETicaret.Core.IService;
 using Microsoft.AspNetCore.Mvc;
@@ -7,7 +8,7 @@ namespace ETicaret.API.Controllers
 {
     [Route("api/[Controller]")]
     [ApiController]
-    public class KategorilerController : Controller
+    public class KategorilerController : BaseController
     {
 
         private readonly IService<Kategoriler> _service;
@@ -31,12 +32,10 @@ namespace ETicaret.API.Controllers
         [HttpGet]
         public async Task<IActionResult> KategoriIndex()
         {
-            var kategori = await _service.GetAllAsyncs();
-            //var kategoriDTO = _mapper.Map<List<KategorilerDTO>>(kategori);
-
-            return Ok(kategori);
+            var kategoriler = await _service.GetAllAsyncs();
+            var kategoriDTO = _mapper.Map<List<KategoriDTO>>(kategoriler);
+            return ResultAPI(kategoriDTO);
         }
-
 
     }
 }

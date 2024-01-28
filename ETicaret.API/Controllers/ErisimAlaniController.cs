@@ -3,12 +3,13 @@ using ETicaret.Core.DTO;
 using ETicaret.Core.ETicaretDatabase;
 using ETicaret.Core.IService;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace ETicaret.API.Controllers
 {
     [Route("api/[Controller]")]
     [ApiController]
-    public class ErisimAlaniController : Controller
+    public class ErisimAlaniController : BaseController
     {
         private readonly IService<ErisimAlanlari> _service;
         private readonly IMapper _mapper;
@@ -28,17 +29,18 @@ namespace ETicaret.API.Controllers
         [HttpGet]
         public async Task<IActionResult> ErisimAlaniIndex()
         {
-            var erisimAlani = await _service.GetAllAsyncs();
+            var erisimAlani = await _erisimService.GetErisimAlani();
             var erisimDTO = _mapper.Map<List<ErisimAlanlariDTO>>(erisimAlani);
-            return Ok(erisimDTO);
+            return ResultAPI(erisimDTO);
         }
         [HttpPost]
         public async Task<IActionResult> ErisimSave(ErisimAlanlariDTO erisimDTO)
         {
             var mapErisim = _mapper.Map<ErisimAlanlari>(erisimDTO);
+            mapErisim.AktifMi = true;
             var erisimSave = await _service.AddAsync(mapErisim);
             var mapAdd = _mapper.Map<ErisimAlanlariDTO>(erisimSave);
-            return Ok(mapAdd);
+            return ResultAPI(mapAdd);
         }
         [HttpPut]
         public async Task<IActionResult> ErisimUpdate(ErisimAlanlariUpdateDTO erisimUpdateDTO)
@@ -46,8 +48,9 @@ namespace ETicaret.API.Controllers
             var getErisim = await _service.GetByIdAsync(erisimUpdateDTO.Id);
             if (getErisim != null)
             {
-                await _service.UpdateAsync(_mapper.Map<ErisimAlanlari>(erisimUpdateDTO));
-                return Ok();
+                await _service.UpdateAsync(_mapper.Map(erisimUpdateDTO, getErisim));
+
+                return ResultAPI(erisimUpdateDTO);
 
             }
             else
@@ -72,7 +75,7 @@ namespace ETicaret.API.Controllers
                         await _yetkiErisimService.RemoveAsync(_mapper.Map<YetkiErisim>(item));
                     }
                 }
-                await _service.RemoveAsync(_mapper.Map<ErisimAlanlari>(getErisim));
+                await _erisimService.ErisimAlaniSilAsync(id);
                 return Ok();
             }
             else
@@ -113,6 +116,41 @@ namespace ETicaret.API.Controllers
             {
                 var erisimDto = _mapper.Map<ErisimAlanlariDTO>(erisim);
                 return Ok(erisimDto);
+
+            }
+            else
+            {
+                return NoContent();
+
+            }
+        }
+        [HttpGet("ErisimAlaniBulWithName")]
+
+        public async Task<IActionResult> ErisimAlaniBulWithName(string name)
+        {
+            var ErisimAlaniVarMi = await _erisimService.GetAllQuery(k => k.ViewAdi == name).FirstOrDefaultAsync();
+            if (ErisimAlaniVarMi != null)
+            {
+                var erisimAlanDto = _mapper.Map<ErisimAlanlariDTO>(ErisimAlaniVarMi);
+
+                return ResultAPI(erisimAlanDto);
+
+            }
+            else
+            {
+                return NoContent();
+
+            }
+        }
+        [HttpGet("ErisimAlaniBulWithId/{id:int}")]
+        public async Task<IActionResult> ErisimAlaniBul(int id)
+        {
+            var yetkiVarMi = await _erisimService.GetAllQuery(k => k.Id == id).FirstOrDefaultAsync();
+            if (yetkiVarMi != null)
+            {
+                //var yetkiDto = _mapper.Map<YetkilerDTO>(yetkiVarMi);
+
+                return ResultAPI(yetkiVarMi);
 
             }
             else

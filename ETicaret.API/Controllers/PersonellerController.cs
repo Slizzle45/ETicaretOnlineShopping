@@ -8,15 +8,24 @@ namespace ETicaret.API.Controllers
 {
 	[ApiController]
 	[Route("api/[Controller]")]
-	public class PersonellerController : Controller
+	public class PersonellerController : BaseController
 	{
 		private readonly IService<Personeller> _service;
 		private readonly IMapper _mapper;
+		private readonly IPersonellerService _personelService;
 
-		public PersonellerController(IService<Personeller> service,IMapper mapper)
+		public PersonellerController(IService<Personeller> service,IMapper mapper,IPersonellerService personellerService)
 		{
 			_service = service;
 			_mapper = mapper;
+			_personelService = personellerService;
+		}
+
+		[HttpGet("Action")]//WEB-API KATMANINDA PersonellerApıService CLASSI İÇİN OLUŞTURLDU
+		public async Task<IActionResult> GetPersonellerWithKullanicilar()
+		{
+			return ResultAPI(await _personelService.GetPersonellerWithKullanicilarAsync());
+
 		}
 
 		[HttpGet]
@@ -40,18 +49,19 @@ namespace ETicaret.API.Controllers
 			return Ok(mapAdd);
 		}
 
-		[HttpPut("id")]
-		public async Task<IActionResult> PersonelUpdate(int id, PersonellerUpdateDTO personelupdateDto)
+		[HttpPut("PersonelUpdate")]
+		public async Task<IActionResult> PersonelUpdate(PersonellerUpdateDTO personelupdateDto)
 		{
-			var getPersonel = await _service.GetByIdAsync(id);
-			if (getPersonel == null)
+			var getPersonel = await _service.GetByIdAsync(personelupdateDto.Id);
+			if (getPersonel != null)
 			{
-				return NotFound();
+				await _service.UpdateAsync(_mapper.Map<Personeller>(personelupdateDto));
+				return Ok();
 			}
 			
 			else
 			{
-				_mapper.Map(personelupdateDto, getPersonel);
+				return NoContent();
 				return Ok(_mapper.Map<PersonellerDTO>(getPersonel));
 
 			}
@@ -70,6 +80,20 @@ namespace ETicaret.API.Controllers
 				await _service.RemoveAsync(getPersonel);
 				return NoContent();
 			}
+		}
+		[HttpGet("PersonelGetById/{id}")]
+		public async Task<IActionResult> PersonelGetById(int id)
+		{
+			var getPersonel=await _service.GetByIdAsync(id);
+			return Ok(getPersonel);
+		}
+
+		[HttpGet("GetPersonellerWithKullanicilarDTO")]
+		public async Task<IActionResult> GetPersonelWithKullanicilar()
+		{
+			var personel = await _service.GetAllAsyncs();
+			var personelDTO=_mapper.Map<List<GetPersonellerWithKullanicilarDTO>>(personel);
+			return Ok(personelDTO);
 		}
 	}
 }

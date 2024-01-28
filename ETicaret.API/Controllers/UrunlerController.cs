@@ -32,7 +32,7 @@ namespace ETicaret.API.Controllers
         }
 
 
-
+        //...api/Urunler/UrunlerIndex
         [HttpGet]
         public async Task<IActionResult> UrunlerIndex()
         {
