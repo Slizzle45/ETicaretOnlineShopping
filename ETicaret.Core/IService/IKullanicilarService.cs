@@ -14,7 +14,9 @@ namespace ETicaret.Core.IService
         Task<List<GetKullanicilarWithYetkilerDTO>> GetKullanicilarWithYetkilerAsync();
         Task<GetKullanicilarWithYetkilerDTO> GetKullanicilarWithYetkilerAsync(int kullaniciId);
         Task<Kullanicilar> getKullanicilarWithYetkilerAsync(Kullanicilar yetkiler);
+          Task<Kullanicilar> Giris(string kullaniciAdi, string sifre);
 
-        
+
+
     }
 }

@@ -48,5 +48,12 @@ namespace ETicaret.Service.Services
         {
 			throw new NotImplementedException();
 		}
+        public async Task<Kullanicilar> Giris(string kullaniciAdi, string sifre)
+        {
+            var kullaniciList = _kullaniciRepo.Find(k => k.Adi == kullaniciAdi && k.KullaniciSifre == sifre);
+            var kullanici = kullaniciList.FirstOrDefault(); // İlk eşleşen kullanıcıyı al
+
+            return kullanici;
+        }
     }
 }

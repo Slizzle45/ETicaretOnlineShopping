@@ -9,7 +9,7 @@ namespace ETicaret.core.ETicaretDtabase
 {
     public class ExixtsStoredProcedure
     {
-        ////
+        //AppDbContext db = new AppDbContext();
 
         //public string Sp_AdresMusteriIl()
         //{
@@ -30,7 +30,7 @@ namespace ETicaret.core.ETicaretDtabase
         //        var list = db.Database.ExecuteSqlRaw(sql);
         //        return "Sp_GetMusteriAdresBilgileri başarılı bir şekilde oluşturuldu";
         //    }
-        //    catch(Exception ex)
+        //    catch (Exception ex)
         //    {
         //        return "HATA:" + ex.Message;
         //    }

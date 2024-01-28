@@ -17,15 +17,18 @@ namespace ETicaret.Repository.Repositories
 
 		public async Task<List<Personeller>> GetPersonellerWithKullanicilarAsync()
 		{
-			return await _eTicaretDB.Personeller.Include(k => k.Kullanicilar).ToListAsync();
+			//return await _eTicaretDB.Personeller.Include(k => k.Kullanicilar).ToListAsync();
+			throw new NotImplementedException();
 		}
 
 		public async Task<Personeller> GetPersonellerWithKullanicilarAsync(int personellerId)
 		{
-			return await _eTicaretDB.Personeller.Where(k => k.Id == personellerId).Include(k => k.Kullanicilar).FirstOrDefaultAsync();
-		}
+			//return await _eTicaretDB.Personeller.Where(k => k.Id == personellerId).Include(k => k.Kullanicilar).FirstOrDefaultAsync();
+            throw new NotImplementedException();
 
-		public async Task<string> PersonelEkle(string PersonelAdi, string PersonelSoyadi, string Cinsiyet, decimal Maas, DateTime MaasOdemeTarih, bool MedeniHali, string CalistigiFirma, string Hakkinda, string yasadigiSehir, int personelBilgiId, int kullaniciId)
+        }
+
+        public async Task<string> PersonelEkle(string PersonelAdi, string PersonelSoyadi, string Cinsiyet, decimal Maas, DateTime MaasOdemeTarih, bool MedeniHali, string CalistigiFirma, string Hakkinda, string yasadigiSehir, int personelBilgiId, int kullaniciId)
 		{
 			try
 			{
