@@ -5,7 +5,7 @@
 namespace ETicaret.Repository.Migrations
 {
     /// <inheritdoc />
-    public partial class SPEkleme : Migration
+    public partial class SpEklemeMigration : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)

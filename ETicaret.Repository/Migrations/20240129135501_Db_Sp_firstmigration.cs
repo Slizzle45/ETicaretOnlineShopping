@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace ETicaret.Repository.Migrations
 {
     /// <inheritdoc />
-    public partial class IlkYukleme : Migration
+    public partial class DbSpfirstmigration : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -237,6 +237,7 @@ namespace ETicaret.Repository.Migrations
                     YetkiId = table.Column<int>(type: "int", nullable: false),
                     MusteriId = table.Column<int>(type: "int", nullable: false),
                     PersonelId = table.Column<int>(type: "int", nullable: false),
+                    PersonellerId = table.Column<int>(type: "int", nullable: true),
                     AktifMi = table.Column<bool>(type: "bit", nullable: false),
                     EklenmeTarih = table.Column<DateTime>(type: "datetime2", nullable: false),
                     GuncellenmeTarih = table.Column<DateTime>(type: "datetime2", nullable: true),
@@ -245,6 +246,11 @@ namespace ETicaret.Repository.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Kullanicilar", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Kullanicilar_Personeller_PersonellerId",
+                        column: x => x.PersonellerId,
+                        principalTable: "Personeller",
+                        principalColumn: "Id");
                     table.ForeignKey(
                         name: "FK_Kullanicilar_Yetkiler_YetkiId",
                         column: x => x.YetkiId,
@@ -317,7 +323,6 @@ namespace ETicaret.Repository.Migrations
                     Telefonu = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false),
                     Meslek = table.Column<string>(type: "nvarchar(max)", nullable: true, defaultValue: "50"),
                     DogumTarihi = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    KullanicilarId = table.Column<int>(type: "int", nullable: true),
                     AktifMi = table.Column<bool>(type: "bit", nullable: false),
                     EklenmeTarih = table.Column<DateTime>(type: "datetime2", nullable: false),
                     GuncellenmeTarih = table.Column<DateTime>(type: "datetime2", nullable: true),
@@ -327,8 +332,8 @@ namespace ETicaret.Repository.Migrations
                 {
                     table.PrimaryKey("PK_Musteriler", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Musteriler_Kullanicilar_KullanicilarId",
-                        column: x => x.KullanicilarId,
+                        name: "FK_Musteriler_Kullanicilar_KullaniciId",
+                        column: x => x.KullaniciId,
                         principalTable: "Kullanicilar",
                         principalColumn: "Id");
                 });
@@ -476,6 +481,11 @@ namespace ETicaret.Repository.Migrations
                 column: "IlKodu");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Kullanicilar_PersonellerId",
+                table: "Kullanicilar",
+                column: "PersonellerId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Kullanicilar_YetkiId",
                 table: "Kullanicilar",
                 column: "YetkiId");
@@ -492,9 +502,11 @@ namespace ETicaret.Repository.Migrations
                 column: "UstMenuId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Musteriler_KullanicilarId",
+                name: "IX_Musteriler_KullaniciId",
                 table: "Musteriler",
-                column: "KullanicilarId");
+                column: "KullaniciId",
+                unique: true,
+                filter: "[KullaniciId] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
                 name: "IX_SiparisDetay_SiparisId",
@@ -553,9 +565,6 @@ namespace ETicaret.Repository.Migrations
                 name: "Menular");
 
             migrationBuilder.DropTable(
-                name: "Personeller");
-
-            migrationBuilder.DropTable(
                 name: "Sepetler");
 
             migrationBuilder.DropTable(
@@ -590,6 +599,9 @@ namespace ETicaret.Repository.Migrations
 
             migrationBuilder.DropTable(
                 name: "Kullanicilar");
+
+            migrationBuilder.DropTable(
+                name: "Personeller");
 
             migrationBuilder.DropTable(
                 name: "Yetkiler");

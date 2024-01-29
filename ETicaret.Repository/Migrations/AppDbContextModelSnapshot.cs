@@ -270,6 +270,9 @@ namespace ETicaret.Repository.Migrations
                     b.Property<bool>("PersonelMi")
                         .HasColumnType("bit");
 
+                    b.Property<int?>("PersonellerId")
+                        .HasColumnType("int");
+
                     b.Property<string>("Soyadi")
                         .IsRequired()
                         .HasMaxLength(100)
@@ -279,6 +282,8 @@ namespace ETicaret.Repository.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("PersonellerId");
 
                     b.HasIndex("YetkiId");
 
@@ -365,9 +370,6 @@ namespace ETicaret.Repository.Migrations
                     b.Property<int?>("KullaniciId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("KullanicilarId")
-                        .HasColumnType("int");
-
                     b.Property<string>("Meslek")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("nvarchar(max)")
@@ -385,7 +387,9 @@ namespace ETicaret.Repository.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("KullanicilarId");
+                    b.HasIndex("KullaniciId")
+                        .IsUnique()
+                        .HasFilter("[KullaniciId] IS NOT NULL");
 
                     b.ToTable("Musteriler");
                 });
@@ -771,11 +775,17 @@ namespace ETicaret.Repository.Migrations
 
             modelBuilder.Entity("ETicaret.Core.ETicaretDatabase.Kullanicilar", b =>
                 {
+                    b.HasOne("ETicaret.Core.ETicaretDatabase.Personeller", "Personeller")
+                        .WithMany("Kullanicilar")
+                        .HasForeignKey("PersonellerId");
+
                     b.HasOne("ETicaret.Core.ETicaretDatabase.Yetkiler", "Yetkiler")
                         .WithMany("Kullanicilar")
                         .HasForeignKey("YetkiId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Personeller");
 
                     b.Navigation("Yetkiler");
                 });
@@ -800,8 +810,8 @@ namespace ETicaret.Repository.Migrations
             modelBuilder.Entity("ETicaret.Core.ETicaretDatabase.Musteriler", b =>
                 {
                     b.HasOne("ETicaret.Core.ETicaretDatabase.Kullanicilar", "Kullanicilar")
-                        .WithMany()
-                        .HasForeignKey("KullanicilarId");
+                        .WithOne("Musteriler")
+                        .HasForeignKey("ETicaret.Core.ETicaretDatabase.Musteriler", "KullaniciId");
 
                     b.Navigation("Kullanicilar");
                 });
@@ -913,6 +923,8 @@ namespace ETicaret.Repository.Migrations
 
             modelBuilder.Entity("ETicaret.Core.ETicaretDatabase.Kullanicilar", b =>
                 {
+                    b.Navigation("Musteriler");
+
                     b.Navigation("Siparisler");
 
                     b.Navigation("Yorumlar");
@@ -928,6 +940,11 @@ namespace ETicaret.Repository.Migrations
                     b.Navigation("Adresler");
 
                     b.Navigation("Siparisler");
+                });
+
+            modelBuilder.Entity("ETicaret.Core.ETicaretDatabase.Personeller", b =>
+                {
+                    b.Navigation("Kullanicilar");
                 });
 
             modelBuilder.Entity("ETicaret.Core.ETicaretDatabase.Siparisler", b =>
