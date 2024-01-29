@@ -31,8 +31,8 @@ namespace ETicaret.Core.ETicaretDatabase
         public ICollection<Yorumlar> Yorumlar { get; set; }//1 kullanıcı 1 den fazla yorum yapabilir ilişkisinde burda kullanıcı 1 tarafında yer alır
 
         public ICollection<Siparisler> Siparisler { get; set; }//1 kullanıcı 1 den fazla sipariş yapabilir
-        //public Musteriler Musteriler { get; set; }
-        //public Personeller Personeller { get; set; }
+        public Musteriler Musteriler { get; set; }
+        public Personeller Personeller { get; set; }
         //public ICollection<Sepetler> Sepetler { get; set; }
 
         //************************Özel Durum--=> Tablonun kendisi ile bağlanması

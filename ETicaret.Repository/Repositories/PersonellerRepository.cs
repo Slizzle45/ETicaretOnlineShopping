@@ -18,14 +18,12 @@ namespace ETicaret.Repository.Repositories
 
         public async Task<List<Personeller>> GetPersonellerWithKullanicilarAsync()
         {
-            //return await _eTicaretDB.Personeller.Include(k => k.Kullanicilar).ToListAsync();
-            throw new NotImplementedException();
+            return await _eTicaretDB.Personeller.Include(k => k.Kullanicilar).ToListAsync();
         }
 
         public async Task<Personeller> GetPersonellerWithKullanicilarAsync(int personellerId)
         {
-            //return await _eTicaretDB.Personeller.Where(k => k.Id == personellerId).Include(k => k.Kullanicilar).FirstOrDefaultAsync();
-            throw new NotImplementedException();
+            return await _eTicaretDB.Personeller.Where(k => k.Id == personellerId).Include(k => k.Kullanicilar).FirstOrDefaultAsync();
 
         }
 

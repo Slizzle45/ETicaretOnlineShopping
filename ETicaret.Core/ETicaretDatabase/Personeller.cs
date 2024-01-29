@@ -30,7 +30,7 @@ namespace ETicaret.Core.ETicaretDatabase
 
         public int PersonelKullaniciBilgileriId { get; set; }
 
-        //public ICollection< Kullanicilar> Kullanicilar { get; set; }//Personeli ekleyen Kullanıcı
+        public ICollection< Kullanicilar> Kullanicilar { get; set; }//Personeli ekleyen Kullanıcı
 
         //public Kullanicilar PersonelKullaniciBilgileri { get; set; }//Personelin Login için kullandığı Kullanıcı bilgilerini tutar
         //public virtual Siparisler Siparisler { get; set; }//1 kullanıcı 1 den fazla siparişi alabilir

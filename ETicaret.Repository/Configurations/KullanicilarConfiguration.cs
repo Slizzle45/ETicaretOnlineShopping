@@ -22,7 +22,7 @@ namespace ETicaret.Repository.Configurations
             builder.Property(k => k.KullaniciSifre).IsRequired();
             // builder.Property(k => k.PersonelMi).IsRequired();//.HasColumnType("bit");//bool=> C# => bit
             //builder.HasOne(k => k.Yetkiler).WithMany(k => k.Kullanicilar).HasForeignKey(k => k.YetkiId);
-            //builder.HasOne(k => k.Musteriler).WithOne(k => k.Kullanicilar).HasForeignKey<Musteriler>(k => k.KullaniciId);
+            builder.HasOne(k => k.Musteriler).WithOne(k => k.Kullanicilar).HasForeignKey<Musteriler>(k => k.KullaniciId);
             builder.HasOne(k => k.Yetkiler).WithMany(k => k.Kullanicilar).HasForeignKey(k => k.YetkiId);
             builder.HasMany(k => k.Yorumlar).WithOne(k => k.Kullanicilar).HasForeignKey(k => k.KullaniciId);
             builder.HasMany(k => k.Siparisler).WithOne(k => k.Kullanicilar).HasForeignKey(k => k.KullaniciId);

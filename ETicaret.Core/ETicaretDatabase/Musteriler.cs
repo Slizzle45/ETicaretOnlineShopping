@@ -17,6 +17,6 @@ namespace ETicaret.Core.ETicaretDatabase
         public Kullanicilar Kullanicilar { get; set; }//nullable
         public ICollection<Adresler> Adresler { get; set; }
         public ICollection<Siparisler> Siparisler { get; set; }
-        //Eyüp
+        
     }
 }

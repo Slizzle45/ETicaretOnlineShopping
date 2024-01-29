@@ -15,7 +15,7 @@ namespace ETicaret.Repository.Migrations
         AS
         BEGIN
             SELECT    
-                a.Id AS AdresId, a.AdresBasligi, a.Adres, a.PostaKodu, a.AktifMi, a.EklenmeTarih, 
+                a.Id AS AdresId, a.AdresBasligi, a.Adres, a.PostaKodu, a.AktifMi, a.EklenmeTarih, a.GuncellenmeTarih,
                 m.Adi + ' ' + m.Soyadi AS MusteriAdiSoyadi, m.Id AS MusteriId, 
                 il.IlAdi,  ilce.IlceAdi   
             FROM Adresler a  
