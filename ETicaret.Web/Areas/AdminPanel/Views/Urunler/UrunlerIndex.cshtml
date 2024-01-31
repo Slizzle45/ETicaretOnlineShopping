@@ -103,7 +103,7 @@
 
                                         <td>
                                             @*@Html.ActionLink("Sil", "#", "", new { @class = "btn btn-sm fas fas fa-trash" })*@
-                                            <a href='~/AdminPanel/Urunler/UrunSilIndex/@item.Id' class='btn btn-sm btn-danger'><i class='fas fas fa-trash'></i></a>
+                                            <a href="javascript:void(0);" onclick="confirmDelete('@item.Id')" class='btn btn-sm btn-danger'><i class='fas fas fa-trash'></i></a>
                                         </td>
                                     </tr>
                                 }
@@ -160,6 +160,14 @@
                 "autoWidth": false,
                 "responsive": true,
             });
-        });</script>
+        });
+        
+        function confirmDelete(itemId) {
+            if (confirm('Bu ürünü silmek istediğinizden emin misiniz?')) {
+                window.location.href = '/AdminPanel/Urunler/UrunSilIndex' + itemId;
+            }
+        }
+    
+    </script>
 }
 
