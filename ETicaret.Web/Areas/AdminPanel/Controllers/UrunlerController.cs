@@ -109,9 +109,11 @@ namespace ETicaret.Web.Areas.AdminPanel.Controllers
             //Fotoğraf ekleme
         }
 
-        public IActionResult UrunSilIndex(int id)
+        [HttpGet]
+        public async Task<IActionResult> UrunSilIndex(int id)
         {
-            return View();
+            var urunGetir = await _service.GetByIdAsync(id);
+            return View(urunGetir);
         }
 
 

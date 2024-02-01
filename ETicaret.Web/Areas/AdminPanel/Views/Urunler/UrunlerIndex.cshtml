@@ -61,7 +61,7 @@
                             </thead>
                             <tbody>
 
-                                @foreach (var item in Model)
+                                @foreach(var item in Model)
                                 {
                                     <tr>
                                         <td>@item.Id</td>
@@ -91,7 +91,7 @@
                                         <td>@item.Aciklama</td>
                                         <td>@item.KullaniciAdiSoyadi</td>
                                         <td>
-                                            <a href='~/AdminPanel/Urunler/UrunResimleri/@item.Id' class='btn btn-sm btn-primary' ><i class='fas fa-eye'></i></a>
+                                            <a href='~/AdminPanel/Urunler/UrunResimleri/@item.Id' class='btn btn-sm btn-primary'><i class='fas fa-eye'></i></a>
 
 
                                         </td>
@@ -161,13 +161,28 @@
                 "responsive": true,
             });
         });
-        
+
         function confirmDelete(itemId) {
             if (confirm('Bu ürünü silmek istediğinizden emin misiniz?')) {
-                window.location.href = '/AdminPanel/Urunler/UrunSilIndex' + itemId;
+                // url
+                var deleteUrl = '/AdminPanel/Urunler/UrunSilIndex/' + itemId;
+
+                // AJAX
+                $.ajax({
+                    type: 'GET',
+                    url: deleteUrl,
+                    success: function (result) {
+                        // sayfayı yenile
+                        location.reload();
+                    },
+                    error: function (error) {
+                        // error
+                        console.error('Silme işlemi başarısız: ', error);
+                    }
+                });
             }
         }
-    
+
     </script>
 }
 
